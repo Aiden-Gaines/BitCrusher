@@ -1,7 +1,7 @@
-import clock from "clock";
 import * as document from "document";
-import { preferences } from "user-settings";
-import * as util from "../common/utils";
+// import clock from "clock";
+// import { preferences } from "user-settings";
+// import * as util from "../common/utils";
 
 const brickArr = [];
 // Values based on SVG, will not automatically update when one is changed
