@@ -1,11 +1,15 @@
+// IMPORTS
 import * as document from "document";
 // import clock from "clock";
 // import { preferences } from "user-settings";
 import * as utils from "../common/utils";
 
+// VARIABLES
+// Set up constant and global variables
 let progress = 0;
 let frame = 0;
 let direction = 1;
+let setupIndex = 0;
 const brickArr = [];
 const shownBricks = [];
 const activeBricks = [[0, 8], [1, 8], [2, 8]];
@@ -16,28 +20,25 @@ const brickOffset = 6;
 const rowCount = 9;
 const colCount = 9;
 
-// Functions
-function getBrick(brickCoord) {
-	return brickArr[brickCoord[1]][brickCoord[0]];
+// FUNCTIONS
+function getCheckBrick(brick) {
+	// Used to get the brick object from the brick array, if given a brick object already, does nothing
+	return ((brick.class == undefined) ? brickArr[brick[1]][brick[0]] : brick);
 }
 
 function show(brick) {
-	if (brick.class == undefined) {
-		getBrick(brick).class = "";
-	} else {
-		brick.class = "";
-	}
+	// Ensures the passed in brick is an object then sets its class to "" (showing it)
+	getCheckBrick(brick).class = "";
 }
 
 function hide(brick) {
-	if (brick.class == undefined) {
-		getBrick(brick).class = "hide";
-	} else {
-		brick.class = "hide";
-	}
+	// Ensures the passed in brick is an object then sets its class to "hide" (hiding it)
+	getCheckBrick(brick).class = "hide";
 }
 
 function flip(brick) {
+	// Ensures the passed in brick is an object then flipping its classed based on the current class
+	brick = getCheckBrick(brick);
 	switch (brick.class) {
 		case ("hide"):
 			show(brick);
@@ -45,27 +46,37 @@ function flip(brick) {
 		case (""):
 			hide(brick);
 			break;
+		default:
+			console.warn(`Tried to flip brick (${brick}), but could not determine current class!`);
 	}
 }
 
 function getNewActiveBricks() {
+	// Assumes the activeBricks is sorted low to high, creates a new activeBricks array based on the direction we are currently moving
 	const newActiveBricks = [];
+	console.log(activeBricks[activeBricks.length - 1][0]);
+	console.log(activeBricks[0][0]);
+	// const endXPos = activeBricks[activeBricks.length - 1][0];
+	// const startXPos = activeBricks[0][0];
+	// If we are at the end of the row, turn around
+	if (activeBricks[activeBricks.length - 1][0] == colCount - 1) direction = -1;
+	if (activeBricks[0][0] == 0) direction = 1;
+	// Move the bricks in the selected direction
 	for (const brick of activeBricks) {
 		newActiveBricks.push([brick[0] + direction, brick[1]])
 	}
+
 	return newActiveBricks;
 }
 
 function mainAnim() {
 	if (frame % 10 == 0) {
 		const newActiveBricks = getNewActiveBricks();
-		console.log(newActiveBricks);
 		const switchBricks = utils.arrSymDiff(activeBricks, newActiveBricks);
-		console.log(utils.arrSymDiff([1, 2, 3], [2, 3, 4]));
-		console.log([[1, 8], [2, 8]].indexOf([1, 8]));
 		for (const brick of switchBricks) {
 			flip(brick);
 		}
+		activeBricks = newActiveBricks;
 	}
 	animate();
 }
@@ -73,8 +84,6 @@ function mainAnim() {
 function convert1Dto2D(index) {
 	return [index % 9, Math.floor(index / 9)];
 }
-
-let setupIndex = 0;
 
 function setup() {
 	// hide all bricks
@@ -103,6 +112,53 @@ function animate() {
 }
 
 // MAIN
+// Edit built-in prototypes (Array.prototype.equals and Array.prototype.indexOf overrides are coming from https://stackoverflow.com/questions/7837456/how-to-compare-arrays-in-javascript more specifically here https://jsfiddle.net/SamyBencherif/8352y6yw/ )
+// Warn if overriding existing method
+if(Array.prototype.equals) console.warn("Overriding existing Array.prototype.equals. Possible causes: New API defines the method, there's a framework conflict or you've got double inclusions in your code.");
+// attach the .equals method to Array's prototype to call it on any array
+Array.prototype.equals = function (array) {
+	// if the other array is a falsy value, return
+	if (!array)
+		return false;
+
+	// compare lengths - can save a lot of time 
+	if (this.length != array.length)
+		return false;
+
+	for (var i = 0, l=this.length; i < l; i++) {
+		// Check if we have nested arrays
+		if (this[i] instanceof Array && array[i] instanceof Array) {
+			// recurse into the nested arrays
+			if (!this[i].equals(array[i])) return false;       
+		}
+		else if (this[i] != array[i]) { 
+			// Warning - two different object instances will never be equal: {x:20} != {x:20}
+			return false;   
+		}
+	}
+	return true;
+}
+
+Array.prototype.indexOf = function (thing) {
+    // if the other array is a falsy value, return -1
+    if (!this) return -1;
+    
+    //start by assuming the array doesn't contain the thing
+    var result = -1;
+    for (var i = 0; i < this.length; i++) {
+		//if anything in the array is the thing then change our mind from before
+		if (this[i] instanceof Array) {
+			if (this[i].equals(thing))
+				result = i;
+		} else {
+			if (this[i] === thing) result = i;
+		}
+	}
+
+	//return the decision we left in the variable, result
+    return result;
+}
+
 // Get each brick
 for (let y = 0; y < rowCount; y++) {
   let tempArr = [];
