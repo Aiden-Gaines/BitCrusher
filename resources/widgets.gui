@@ -1,10 +1,10 @@
 <svg>
-  <defs>
-    <link rel="stylesheet" href="styles.css" />
-    <link rel="import" href="/mnt/sysassets/widgets_common.gui" />
-    <link rel="import" href="/mnt/sysassets/widgets/text_button.defs" />
-    <symbol id="brick">
-      <rect width="30" height="30" />
-    </symbol>
-  </defs>
+	<defs>
+		<link rel="stylesheet" href="styles.css" />
+		<link rel="import" href="/mnt/sysassets/widgets_common.gui" />
+		<link rel="import" href="/mnt/sysassets/widgets/text_button.defs" />
+		<symbol id="brick">
+			<rect width="30" height="30" />
+		</symbol>
+	</defs>
 </svg>
