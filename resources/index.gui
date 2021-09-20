@@ -90,4 +90,11 @@
       gradient-color1="maroon"
       gradient-color2="lime" />
   </svg>
+  <svg>
+    <use id="button" href="#push-button" y="65" height="80" fill="fb-green" font-family="System-Regular" font-size="50">
+     <set href="#text" attributeName="text-buffer" to="Click Me!" />
+     <set href="#text" attributeName="fill" to="fb-white" />
+     <set href="#text" attributeName="y" to="20" />
+    </use>
+   </svg>
 </svg>
