@@ -1,19 +1,12 @@
+'use strict';
 // IMPORTS
 import { getBrick } from "../app/setup";
 
-// FUNCTIONS
-// Add zero in front of numbers < 10
-export function zeroPad(i) {
-  if (i < 10) {
-    i = "0" + i;
-  }
-  return i;
-}
 
+// FUNCTIONS
 // Find the difference between two sets
 export function arrSymDiff(arr1, arr2) {
 	return arr1
-		// .filter(x => !arr2.includes(x))
 		.filter(x => -1 == arr2.indexOf(x))
 		.concat(arr2.filter(x => -1 == arr1.indexOf(x)));
 }
@@ -48,7 +41,7 @@ export function flip(brick) {
 	}
 }
 
-// Convert index for 1D array to the equivalent in a 2D array
+// Convert index for 1D array to the equivalent in a 2D array [x, y]
 export function convert1Dto2D(index) {
 	return [index % 9, Math.floor(index / 9)];
 }

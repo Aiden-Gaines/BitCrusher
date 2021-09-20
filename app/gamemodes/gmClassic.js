@@ -1,12 +1,15 @@
+'use strict';
 // IMPORTS
 import * as utils from '../../common/utils';
-import { memory } from "system";
+
 
 // VARIABLES
-const shownBricks = [];
-const activeBricks = [[3, 8], [4, 8], [5, 8]];
 const direction = 1;
+const shownBricks = [];
+export const activeBricks = [[3, 8], [4, 8], [5, 8]];
 
+
+// FUNCTIONS
 function getNewActiveBricks(colCount) {
 	// Assumes the activeBricks is sorted low to high, creates a new activeBricks array based on the direction we are currently moving
 	const newActiveBricks = [];
@@ -22,11 +25,8 @@ function getNewActiveBricks(colCount) {
 	return newActiveBricks;
 }
 
-export function getActiveBricks() { return activeBricks; }
-
 export function gmClassic(status, { colCount }) {
 	if (status.frame % 10 == 0) {
-		console.log("JS memory: " + memory.js.used + "/" + memory.js.total);
 		const newActiveBricks = getNewActiveBricks(colCount);
 		const switchBricks = utils.arrSymDiff(activeBricks, newActiveBricks);
 

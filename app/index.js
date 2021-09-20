@@ -1,18 +1,23 @@
+'use strict';
 // IMPORTS
-import { gmClassic } from "./gamemodes/gmClassic";
+// Local files
 import { setup } from "./setup";
 import { startup } from "./startup";
+// System/Fitbit modules
 import { memory } from "system";
 import { display } from "display";
+// Gamemodes
+import { gmClassic } from "./gamemodes/gmClassic";
 
 
 // VARIABLES
 const status = {
 	frame: 0,
 	progress: 0,
-	currentRafFrame: -1,
+	currentRAFFrame: -1,
 }
-const setupInfo = {
+const globals = {
+	// Values based on SVG, will not automatically update when one is changed
 	brickSize: 30,
 	brickBorder: 2,
 	brickOffset: 6,
@@ -25,19 +30,19 @@ const setupInfo = {
 function animate() {
 	// Call this function on the next frame to complete the loop.   -Must be first thing done, so that the other rAF call gets completed before this one on the next frame
 	status.currentRafFrame = requestAnimationFrame(animate);
-	// if (status.progress != 3) console.log(`Running progress: ${status.progress} frame: ${status.frame}`);
+	// console.log(`Running progress: ${status.progress} frame: ${status.frame}`);
 	switch (status.progress) {
 		// 0- While this file is still running itself
 		case (0): break;
 		// 1- Setup the gameboard
 		case (1):
-			requestAnimationFrame(() => setup(status, setupInfo));
+			requestAnimationFrame(() => setup(status, globals));
 			break;
 		case (2):
-			requestAnimationFrame(() => startup(status, setupInfo));
+			requestAnimationFrame(() => startup(status, globals));
 			break;
 		case (3):
-			requestAnimationFrame(() => gmClassic(status, setupInfo));
+			requestAnimationFrame(() => gmClassic(status, globals));
 			break;
 	}
 
@@ -54,7 +59,7 @@ display.addEventListener("change", () => {
 	if (display.on) {
 		animate();
 	} else if (!display.on) {
-		cancelAnimationFrame(status.currentRafFrame);
+		cancelAnimationFrame(globals.currentRafFrame);
 	}
 });
 
@@ -83,7 +88,7 @@ Array.prototype.equals = function (array) {
 	return true;
 }
 
-if (Array.prototype.indexOf) console.warn("Overriding existing Array.prototype.indexOf.");
+if (Array.prototype.indexOf) console.warn("Overriding existing Array.prototype.indexOf");
 Array.prototype.indexOf = function (thing) {
     // if the other array is a falsy value, return -1
     if (!this) return -1;
