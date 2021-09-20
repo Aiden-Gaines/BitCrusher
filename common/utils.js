@@ -1,5 +1,7 @@
-import { getBrick } from "../app/index";
+// IMPORTS
+import { getBrick } from "../app/setup";
 
+// FUNCTIONS
 // Add zero in front of numbers < 10
 export function zeroPad(i) {
   if (i < 10) {

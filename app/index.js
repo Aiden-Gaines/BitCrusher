@@ -1,91 +1,63 @@
 // IMPORTS
-import * as document from "document";
-import * as utils from "../common/utils";
-
-/*
-	I think if we want to seperate everything out, we need to even put setup in another file,
-	and only use this file as the one that manages the animate function. Then, just import everything into this file.
-	Cause I don't think you can export from this file. Either that, or the circular dependancy I currently have
-	is causing issues. Which is not unlikely.
-*/
+import { gmClassic } from "./gamemodes/gmClassic";
+import { setup } from "./setup";
+import { startup } from "./startup";
+import { memory } from "system";
+import { display } from "display";
 
 
 // VARIABLES
-// Set up constant and global variables
-let progress = 0;
-let frame = 0;
-let direction = 1;
-let setupIndex = 0;
-const brickArr = [];
-const shownBricks = [];
-const activeBricks = [[0, 8], [1, 8], [2, 8]];
-// Values based on SVG, will not automatically update when one is changed
-const brickSize = 30;
-const brickBorder = 2;
-const brickOffset = 6;
-const rowCount = 9;
-const colCount = 9;
+const status = {
+	frame: 0,
+	progress: 0,
+	currentRafFrame: -1,
+}
+const setupInfo = {
+	brickSize: 30,
+	brickBorder: 2,
+	brickOffset: 6,
+	rowCount: 9,
+	colCount: 9,
+}
+
 
 // FUNCTIONS
-export function getBrick(brickCoords) {
-	return brickArr[brickCoords[1]][brickCoords[0]];
-}
-
-function getNewActiveBricks() {
-	// Assumes the activeBricks is sorted low to high, creates a new activeBricks array based on the direction we are currently moving
-	const newActiveBricks = [];
-
-	// If we are at the end of the row, turn around
-	if (activeBricks[activeBricks.length - 1][0] == colCount - 1) direction *= -1;
-	if (activeBricks[0][0] == 0) direction *= -1;
-	// Move the bricks in the selected direction
-	for (const brick of activeBricks) {
-		newActiveBricks.push([brick[0] + direction, brick[1]])
-	}
-
-	return newActiveBricks;
-}
-
-function mainAnim() {
-	if (frame % 10 == 0) {
-		const newActiveBricks = getNewActiveBricks();
-		const switchBricks = utils.arrSymDiff(activeBricks, newActiveBricks);
-		for (const brick of switchBricks) {
-			utils.flip(brick);
-		}
-		activeBricks = newActiveBricks;
-	}
-	animate();
-}
-
-function setup() {
-	// hide all bricks
-	if (frame % 1 == 0) {
-		utils.hide(utils.convert1Dto2D(setupIndex));
-		setupIndex++;
-	}
-	if (setupIndex >= rowCount * colCount) {
-		activeBricks.forEach(utils.show);
-		progress++;
-	}
-	animate();
-}
-
 function animate() {
-	switch (progress) {
+	// Call this function on the next frame to complete the loop.   -Must be first thing done, so that the other rAF call gets completed before this one on the next frame
+	status.currentRafFrame = requestAnimationFrame(animate);
+	// if (status.progress != 3) console.log(`Running progress: ${status.progress} frame: ${status.frame}`);
+	switch (status.progress) {
+		// 0- While this file is still running itself
 		case (0): break;
+		// 1- Setup the gameboard
 		case (1):
-			requestAnimationFrame(setup);
+			requestAnimationFrame(() => setup(status, setupInfo));
 			break;
 		case (2):
-			requestAnimationFrame(mainAnim);
+			requestAnimationFrame(() => startup(status, setupInfo));
+			break;
+		case (3):
+			requestAnimationFrame(() => gmClassic(status, setupInfo));
 			break;
 	}
 
-	frame++;
+	// if ( status.frame % 5 == 0 ) console.log("JS memory: " + memory.js.used + "/" + memory.js.total);
+
+	// Increment the frame
+	status.frame++;
 }
 
+
 // MAIN
+// Hook the display.change event to fix a weird memory leak that I literally don't know what is causing it, but this fixes it. I hate the Fitbit SDK
+display.addEventListener("change", () => {
+	if (display.on) {
+		animate();
+	} else if (!display.on) {
+		cancelAnimationFrame(status.currentRafFrame);
+	}
+});
+
 // Edit built-in prototypes (Array.prototype.equals and Array.prototype.indexOf overrides are coming from https://stackoverflow.com/questions/7837456/how-to-compare-arrays-in-javascript more specifically here https://jsfiddle.net/SamyBencherif/8352y6yw/ )
 // Warn if overriding existing method
 if (Array.prototype.equals) console.warn("Overriding existing Array.prototype.equals. Possible causes: New API defines the method, there's a framework conflict or you've got double inclusions in your code.");
@@ -111,6 +83,7 @@ Array.prototype.equals = function (array) {
 	return true;
 }
 
+if (Array.prototype.indexOf) console.warn("Overriding existing Array.prototype.indexOf.");
 Array.prototype.indexOf = function (thing) {
     // if the other array is a falsy value, return -1
     if (!this) return -1;
@@ -131,23 +104,5 @@ Array.prototype.indexOf = function (thing) {
     return result;
 }
 
-// Get each brick
-for (let y = 0; y < rowCount; y++) {
-  const tempArr = [];
-  for (let x = 0; x < colCount; x++) {
-    tempArr.push(document.getElementById(`r${y}c${x}`))
-  }
-  brickArr.push(tempArr);
-}
-
-// Set each brick to the correct position
-for (let y = 0; y < rowCount; y++) {
-  for (let x = 0; x < colCount; x++) {
-    let brick = brickArr[y][x];
-    brick.x = ((brickSize + brickBorder) * x) + brickOffset;
-    brick.y = ((brickSize + brickBorder) * y) + brickOffset;
-  }
-}
-
-progress++;
+status.progress++;
 animate();
