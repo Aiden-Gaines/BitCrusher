@@ -1,4 +1,4 @@
-import { brickArr } from "../app";
+import { getBrick } from "../app/index";
 
 // Add zero in front of numbers < 10
 export function zeroPad(i) {
@@ -18,7 +18,7 @@ export function arrSymDiff(arr1, arr2) {
 
 // Used to get the brick object from the brick array, if given a brick object already, does nothing
 export function getCheckBrick(brick) {
-	return ((brick.class == undefined) ? brickArr[brick[1]][brick[0]] : brick);
+	return ((brick.class == undefined) ? getBrick(brick) : brick);
 }
 
 // Ensures the passed in brick is an object then sets its class to "" (showing it)

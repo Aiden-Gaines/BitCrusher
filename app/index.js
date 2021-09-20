@@ -2,6 +2,14 @@
 import * as document from "document";
 import * as utils from "../common/utils";
 
+/*
+	I think if we want to seperate everything out, we need to even put setup in another file,
+	and only use this file as the one that manages the animate function. Then, just import everything into this file.
+	Cause I don't think you can export from this file. Either that, or the circular dependancy I currently have
+	is causing issues. Which is not unlikely.
+*/
+
+
 // VARIABLES
 // Set up constant and global variables
 let progress = 0;
@@ -19,6 +27,10 @@ const rowCount = 9;
 const colCount = 9;
 
 // FUNCTIONS
+export function getBrick(brickCoords) {
+	return brickArr[brickCoords[1]][brickCoords[0]];
+}
+
 function getNewActiveBricks() {
 	// Assumes the activeBricks is sorted low to high, creates a new activeBricks array based on the direction we are currently moving
 	const newActiveBricks = [];
@@ -139,7 +151,3 @@ for (let y = 0; y < rowCount; y++) {
 
 progress++;
 animate();
-
-module.exports = {
-	brickArr,
-};
