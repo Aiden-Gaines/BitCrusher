@@ -2,7 +2,6 @@
 // IMPORTS
 import { getBrick } from "../app/setup";
 
-
 // FUNCTIONS
 // Find the difference between two sets
 export function arrSymDiff(arr1, arr2) {
