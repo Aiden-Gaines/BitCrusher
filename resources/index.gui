@@ -97,4 +97,14 @@
 			<set href="#text" attributeName="y" to="20" />
 		</use>
 	</svg>
+  <svg>
+		<use id="homebutton" href="#push-button" y="0" height="50%" fill="fb-green" font-family="System-Regular" font-size="50">
+			<set href="#text" attributeName="text-buffer" to="Start" />
+			<set href="#text" attributeName="fill" to="fb-white" />
+			<set href="#text" attributeName="y" to="20" />
+		</use>
+	</svg>
+  <svg>
+    <image id="MainScreen" href="image.png" width="250" height="80" x="80" y="20" />
+  </svg>
 </svg>
