@@ -1,3 +1,7 @@
-.hide {
+.hidden {
 	opacity: 0;
+}
+
+.gameover {
+	fill: white;
 }

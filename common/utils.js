@@ -2,6 +2,10 @@
 // IMPORTS
 import { getBrick } from "../app/setup";
 
+// VARIABLES
+const hiddenClass = 'hidden';
+const shownClass = '';
+
 // FUNCTIONS
 // Find the difference between two sets
 export function arrSymDiff(arr1, arr2) {
@@ -17,22 +21,22 @@ export function getCheckBrick(brick) {
 
 // Ensures the passed in brick is an object then sets its class to "" (showing it)
 export function show(brick) {
-	getCheckBrick(brick).class = "";
+	getCheckBrick(brick).class = shownClass;
 }
 
 // Ensures the passed in brick is an object then sets its class to "hide" (hiding it)
 export function hide(brick) {
-	getCheckBrick(brick).class = "hide";
+	getCheckBrick(brick).class = hiddenClass;
 }
 
 // Ensures the passed in brick is an object then flipping its classed based on the current class
 export function flip(brick) {
 	brick = getCheckBrick(brick);
 	switch (brick.class) {
-		case ('hide'):
+		case (hiddenClass):
 			show(brick);
 			break;
-		case (''):
+		case (shownClass):
 			hide(brick);
 			break;
 		default:

@@ -90,22 +90,26 @@
 		gradient-color1="maroon"
 		gradient-color2="lime" />
 	</svg>
+    <!-- <use href="#dynamic-textarea" class="gameover hidden" y="50">
+      <set href="#text" class="gameover hidden" attributeName="text-buffer" to="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla tempus tristique nibh id sollicitudin." />
+    </use> -->
+	<textarea class="hidden gameover" y="20">Game Over!</textarea>
 	<svg>
-		<use href="#push-button" height="100%" width="100%" id="button-screenwide" class="hide" />
+		<use href="#push-button" class="hidden" height="100%" width="100%" id="button-screenwide" />
 		<!-- <use id="button" href="#push-button" y="65" height="80" fill="fb-green" font-family="System-Regular" font-size="50">
 			<set href="#text" attributeName="text-buffer" to="Click Me!" />
 			<set href="#text" attributeName="fill" to="fb-white" />
 			<set href="#text" attributeName="y" to="20" />
 		</use> -->
 	</svg>
-  <svg>
-		<use class="hide" id="homebutton" href="#push-button" y="0" height="50%" fill="fb-green" font-family="System-Regular" font-size="50">
+<!-- <svg>
+		<use id="homebutton" href="#push-button" y="0" height="50%" fill="fb-green" font-family="System-Regular" font-size="50">
 			<set href="#text" attributeName="text-buffer" to="Start" />
 			<set href="#text" attributeName="fill" to="fb-white" />
 			<set href="#text" attributeName="y" to="20" />
 		</use>
 	</svg>
-  <svg>
-    <image class="hide" id="MainScreen" href="image.png" width="250" height="80" x="80" y="20" />
-  </svg>
+	<svg>
+		<image id="MainScreen" href="image.png" width="250" height="80" x="80" y="20" />
+	</svg> -->
 </svg>

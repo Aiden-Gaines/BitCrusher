@@ -4,10 +4,11 @@
 import { setup } from "./setup";
 import { startup } from "./startup";
 // System/Fitbit modules
-import { memory } from "system";
+// import { memory } from "system";
 import { display } from "display";
 // Gamemodes
-import { gmClassic, gmClassicSetup } from "./gamemodes/gmClassic";
+import { gmClassic, gmClassicSetup, gmClassicGameEnd } from "./gamemodes/gmClassic";
+import { gameover } from "./gameover";
 
 
 // VARIABLES
@@ -32,6 +33,8 @@ function animate() {
 	status.currentRafFrame = requestAnimationFrame(animate);
 	// console.log(`Running progress: ${status.progress} frame: ${status.frame}`);
 	switch (status.progress) {
+		// -1- This case is used when we want to permanently kill the animation loop until a full restart
+		case (-1): cancelAnimationFrame(status.currentRAFFrame);
 		// 0- While this file is still running itself
 		case (0): break;
 		// 1- Setup the gameboard
@@ -48,6 +51,14 @@ function animate() {
 		// 4- Main loop for the classic gamemode
 		case (4):
 			requestAnimationFrame(() => gmClassic(status, globals));
+			break;
+		// 5- Game end for classic gamemode
+		case (5):
+			requestAnimationFrame(() => gmClassicGameEnd(status, globals));
+			break;
+		// 6- Game over screen
+		case (6):
+			requestAnimationFrame(() => gameover(status, globals));
 			break;
 	}
 
