@@ -91,11 +91,12 @@
 		gradient-color2="lime" />
 	</svg>
 	<svg>
-		<use id="button" href="#push-button" y="65" height="80" fill="fb-green" font-family="System-Regular" font-size="50">
+		<use href="#push-button" height="100%" width="100%" id="button-screenwide" class="hide" />
+		<!-- <use id="button" href="#push-button" y="65" height="80" fill="fb-green" font-family="System-Regular" font-size="50">
 			<set href="#text" attributeName="text-buffer" to="Click Me!" />
 			<set href="#text" attributeName="fill" to="fb-white" />
 			<set href="#text" attributeName="y" to="20" />
-		</use>
+		</use> -->
 	</svg>
   <svg>
 		<use id="homebutton" href="#push-button" y="0" height="50%" fill="fb-green" font-family="System-Regular" font-size="50">

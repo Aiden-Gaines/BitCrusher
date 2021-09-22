@@ -7,7 +7,7 @@ import { startup } from "./startup";
 import { memory } from "system";
 import { display } from "display";
 // Gamemodes
-import { gmClassic } from "./gamemodes/gmClassic";
+import { gmClassic, gmClassicSetup } from "./gamemodes/gmClassic";
 
 
 // VARIABLES
@@ -38,10 +38,15 @@ function animate() {
 		case (1):
 			requestAnimationFrame(() => setup(status, globals));
 			break;
+		// 2- Run whatever startup animation we want to have
 		case (2):
 			requestAnimationFrame(() => startup(status, globals));
 			break;
+		// 3- Setup for the classic gamemode
 		case (3):
+			requestAnimationFrame(() => gmClassicSetup(status, globals));
+		// 4- Main loop for the classic gamemode
+		case (4):
 			requestAnimationFrame(() => gmClassic(status, globals));
 			break;
 	}

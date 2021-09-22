@@ -44,3 +44,15 @@ export function flip(brick) {
 export function convert1Dto2D(index) {
 	return [index % 9, Math.floor(index / 9)];
 }
+
+// Takes a brick array (coordinates, not objects) and moves them in the given direction
+export function moveBricks(bricks, offset) {
+	const returnBrickArr = [];
+
+	// Move the bricks in the selected direction
+	for (const brick of bricks) {
+		returnBrickArr.push([brick[0] + offset[0], brick[1] + offset[1]])
+	}
+
+	return returnBrickArr;
+}
