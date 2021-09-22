@@ -1,7 +1,6 @@
 'use strict';
 // IMPORTS
 import * as utils from '../common/utils';
-import { activeBricks } from './gamemodes/gmClassic';
 
 
 // VARIABLES
@@ -17,8 +16,5 @@ export function startup(status, { rowCount, colCount }) {
 	}
 
 	// If we have hidden all the bricks
-	if (setupIndex >= rowCount * colCount) {
-		activeBricks.forEach(utils.show);
-		status.progress++;
-	}
+	if (setupIndex >= rowCount * colCount) status.progress++;
 }
