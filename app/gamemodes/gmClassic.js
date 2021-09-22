@@ -62,7 +62,7 @@ function screenClick(evt) {
 
 	level++;
 
-	if (level == localRowCount - 1) {
+	if (level > localRowCount) {
 		activeBricks = [];
 		return;
 	}
