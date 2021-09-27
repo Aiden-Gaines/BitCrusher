@@ -116,6 +116,7 @@ export function gmClassicGameEnd(status, {}) {
 			flashingBricks.forEach(utils.flip);
 			endFlashAmt--;
 		} else {
+			console.log("pop")
 			if (shownBricks.length != 0) {
 				utils.hide(shownBricks.pop());
 			} else {

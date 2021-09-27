@@ -20,7 +20,7 @@ const status = {
 	frame: 0,
 	progress: 0,
 	currentRAFFrame: -1,
-	currentGamemode: 20,
+	currentGamemode: 10,
 }
 const globals = {
 	// Values based on SVG, will not automatically update when one is changed
