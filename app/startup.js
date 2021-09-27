@@ -16,5 +16,5 @@ export function startup(status, { rowCount, colCount }) {
 	}
 
 	// If we have hidden all the bricks
-	if (setupIndex >= rowCount * colCount) status.progress++;
+	if (setupIndex >= rowCount * colCount) status.progress = status.currentGamemode;
 }

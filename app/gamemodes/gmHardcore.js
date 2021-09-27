@@ -8,12 +8,12 @@ import { gameoverTextElem } from '../gameover';
 // VARIABLES
 let flashingBricks;
 let endFlashAmt = 7;
-const speed = 10;
+const speed = 8;
 const direction = 1;
 const localRowCount = 9;
 const level = 1;
 const shownBricks = [];
-export const activeBricks = [[3, 8], [4, 8], [5, 8]];
+export const activeBricks = [[4, 8]];
 
 
 // FUNCTIONS
@@ -78,7 +78,7 @@ function screenClick(evt) {
 	calculateCurrentSpeed();
 }
 
-export function gmClassicSetup(status, { rowCount }) {
+export function gmHardcoreSetup(status, { rowCount }) {
 	const myButton = document.getElementById('button-screenwide');
 	localRowCount = rowCount;
 	myButton.onclick = screenClick;
@@ -89,7 +89,7 @@ export function gmClassicSetup(status, { rowCount }) {
 	status.progress++; 
 }
 
-export function gmClassic(status, { colCount }) {
+export function gmHardcore(status, { colCount }) {
 	if (status.frame % speed == 0) {
 		if (activeBricks.length == 0) {
 			// Last thing ran before starting closing animation loop
@@ -110,7 +110,7 @@ export function gmClassic(status, { colCount }) {
 	}
 }
 
-export function gmClassicGameEnd(status, {}) {
+export function gmHardcoreGameEnd(status, {}) {
 	if (status.frame % 3 == 0) {
 		if (endFlashAmt != 0) {
 			flashingBricks.forEach(utils.flip);

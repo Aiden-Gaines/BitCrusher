@@ -78,7 +78,7 @@ function screenClick(evt) {
 	calculateCurrentSpeed();
 }
 
-export function gmClassicSetup(status, { rowCount }) {
+export function gmInfiniteSetup(status, { rowCount }) {
 	const myButton = document.getElementById('button-screenwide');
 	localRowCount = rowCount;
 	myButton.onclick = screenClick;
@@ -89,7 +89,7 @@ export function gmClassicSetup(status, { rowCount }) {
 	status.progress++; 
 }
 
-export function gmClassic(status, { colCount }) {
+export function gmInfinite(status, { colCount }) {
 	if (status.frame % speed == 0) {
 		if (activeBricks.length == 0) {
 			// Last thing ran before starting closing animation loop
@@ -110,7 +110,7 @@ export function gmClassic(status, { colCount }) {
 	}
 }
 
-export function gmClassicGameEnd(status, {}) {
+export function gmInfiniteGameEnd(status, {}) {
 	if (status.frame % 3 == 0) {
 		if (endFlashAmt != 0) {
 			flashingBricks.forEach(utils.flip);
