@@ -80,6 +80,7 @@ function screenClick(evt) {
 
 export function gmClassicSetup(status, { rowCount }) {
 	const myButton = document.getElementById('button-screenwide');
+	const myGradient = document.getElementById('bgGradient');
 	localRowCount = rowCount;
 	myButton.onclick = screenClick;
 
