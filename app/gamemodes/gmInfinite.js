@@ -80,6 +80,9 @@ function screenClick(evt) {
 
 export function gmInfiniteSetup(status, { rowCount }) {
 	const myButton = document.getElementById('button-screenwide');
+	const myGradient = document.getElementById('bgGradient');
+	myGradient.gradient.colors.c1 = "red";
+	myGradient.gradient.colors.c2 = "lime";
 	localRowCount = rowCount;
 	myButton.onclick = screenClick;
 
