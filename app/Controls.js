@@ -1,4 +1,7 @@
-import document from "document";
+'use strict';
+// IMPORTS
+import * as document from "document";
+
 
 // TODO: Bulk up Controls.js
 // Ideally would be a central control center for user interaction
@@ -6,9 +9,26 @@ import document from "document";
 // then it would be automatically hooked and this file would manage having a bunch of function that might need to
 // be run at once from one tap
 
-function button(){
-    let button = document.getElementById("button");
-    button.onactivate = function(evt) {
-        button.text = "Clicked";
-    }
+
+// VARIABLES
+const clickFuncs = [];
+
+
+// FUNCTIONS
+export function addFuncOnTap(func) {
+	clickFuncs.push(func);
+}
+
+export function removeFuncOnTap(func) {
+	const index = clickFuncs.indexOf(func);
+	if (index > -1) {
+		clickFuncs.splice(index, 1);
+	}
+}
+
+
+// MAIN
+let button = document.getElementById('button-screenwide');
+button.onclick = function(evt) {
+	clickFuncs.forEach((item) => { item.call(this, evt) });
 }
