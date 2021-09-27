@@ -14,6 +14,16 @@ export function arrSymDiff(arr1, arr2) {
 		.concat(arr2.filter(x => -1 == arr1.indexOf(x)));
 }
 
+// Pad a zero to the beginning of a string if it's only 1 character long
+// Add zero in front of numbers < 10
+export function zeroPad(i) {
+	if (i < 10) {
+		i = "0" + i;
+	}
+	return i;
+}
+
+
 // Used to get the brick object from the brick array, if given a brick object already, does nothing
 export function getCheckBrick(brick) {
 	return ((brick.class == undefined) ? getBrick(brick) : brick);
