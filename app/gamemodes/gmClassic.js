@@ -2,7 +2,7 @@
 // IMPORTS
 import * as utils from '../../common/utils';
 import document from 'document';
-import { gameoverTextElem } from '../gameover';
+//import { gameoverTextElem } from '../gameover';
 
 
 // VARIABLES
@@ -119,7 +119,7 @@ export function gmClassicGameEnd(status, {}) {
 			if (shownBricks.length != 0) {
 				utils.hide(shownBricks.pop());
 			} else {
-				gameoverTextElem.class = "hidden gameover test";
+				//endScreenElems.class = "hidden gameover test";
 				status.progress++;
 			}
 		}
