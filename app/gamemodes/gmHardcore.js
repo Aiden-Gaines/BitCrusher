@@ -2,7 +2,6 @@
 // IMPORTS
 import * as utils from '../../common/utils';
 import document from 'document';
-import { gameoverTextElem } from '../gameover';
 
 
 // VARIABLES
@@ -97,7 +96,6 @@ export function gmHardcore(status, { colCount }) {
 		if (activeBricks.length == 0) {
 			// Last thing ran before starting closing animation loop
 			// Set some variables once before we begin
-			console.log(level - 2);
 			flashingBricks = getBrickRow(level - 2);
 			status.progress++;
 			return;
@@ -122,7 +120,6 @@ export function gmHardcoreGameEnd(status, {}) {
 			if (shownBricks.length != 0) {
 				utils.hide(shownBricks.pop());
 			} else {
-				gameoverTextElem.class = "hidden gameover test";
 				status.progress = 100;
 			}
 		}

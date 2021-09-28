@@ -2,7 +2,6 @@
 // IMPORTS
 import * as utils from '../../common/utils';
 import document from 'document';
-import { gameoverTextElem } from '../gameover';
 
 
 // VARIABLES
@@ -105,7 +104,7 @@ function hslToHex(h, s, l) {
 	  return hex.length === 1 ? '0' + hex : hex;
 	};
 	return `#${toHex(r)}${toHex(g)}${toHex(b)}`;
-  }
+}
 
 
 export function gmDrunkSetup(status, { rowCount }) {
@@ -165,7 +164,6 @@ export function gmDrunkGameEnd(status, {}) {
 			if (shownBricks.length != 0) {
 				utils.hide(shownBricks.pop());
 			} else {
-				gameoverTextElem.class = "hidden gameover test";
 				status.progress = 100;
 			}
 		}

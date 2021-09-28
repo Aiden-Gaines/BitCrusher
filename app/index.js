@@ -11,7 +11,7 @@ import { gmClassic, gmClassicSetup, gmClassicGameEnd } from "./gamemodes/gmClass
 import { gmHardcore, gmHardcoreSetup, gmHardcoreGameEnd } from "./gamemodes/gmHardcore";
 import { gmDrunk, gmDrunkSetup, gmDrunkGameEnd } from "./gamemodes/gmDrunk";
 import { gmInfinite, gmInfiniteSetup, gmInfiniteGameEnd } from "./gamemodes/gmInfinite";
-
+// Other animation states
 import { gameover } from "./gameover";
 import { MainScreen } from "./MainScreen";
 

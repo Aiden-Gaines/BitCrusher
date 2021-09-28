@@ -2,7 +2,6 @@
 // IMPORTS
 import * as utils from '../../common/utils';
 import document from 'document';
-import { gameoverTextElem } from '../gameover';
 
 
 // VARIABLES
