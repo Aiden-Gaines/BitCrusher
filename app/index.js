@@ -9,6 +9,7 @@ import { display } from "display";
 // Gamemodes
 import { gmClassic, gmClassicSetup, gmClassicGameEnd } from "./gamemodes/gmClassic";
 import { gameover } from "./gameover";
+import { MainScreen } from "./MainScreen";
 
 
 // VARIABLES
@@ -41,23 +42,27 @@ function animate() {
 		case (1):
 			requestAnimationFrame(() => setup(status, globals));
 			break;
-		// 2- Run whatever startup animation we want to have
+		// 1- Main screen
 		case (2):
+			requestAnimationFrame(() => MainScreen(status, globals));
+			break;
+		// 2- Run whatever startup animation we want to have
+		case (3):
 			requestAnimationFrame(() => startup(status, globals));
 			break;
 		// 3- Setup for the classic gamemode
-		case (3):
+		case (4):
 			requestAnimationFrame(() => gmClassicSetup(status, globals));
 		// 4- Main loop for the classic gamemode
-		case (4):
+		case (5):
 			requestAnimationFrame(() => gmClassic(status, globals));
 			break;
 		// 5- Game end for classic gamemode
-		case (5):
+		case (6):
 			requestAnimationFrame(() => gmClassicGameEnd(status, globals));
 			break;
 		// 6- Game over screen
-		case (6):
+		case (7):
 			requestAnimationFrame(() => gameover(status, globals));
 			break;
 	}

@@ -1,16 +1,30 @@
-'use strict';
 // IMPORTS
 import * as document from 'document';
+import * as controls from './controls';
 
+//VARIABLES
+const endScreenElems = document.getElementsByClassName('endScreen')[0];
+const clicked = false;
+const firstRun = true;
+//export var myImage = document.getElementById("MainScreen");
+//export const button = document.getElementById("homebutton");
 
-// VARIABLES
-const gameoverElems = document.getElementsByClassName('gameover');
-export const gameoverTextElem = document.getElementsByClassName('gameover-text');
+function screenClick(evt){
+    //console.log("pls work")
+    clicked = true;
 
+}
 
-// FUNCTIONS
-export function gameover(status, {}) {
-	gameoverElems.forEach((item) => { item.class = item.class.slice(6); });
-	// Permanently kill the animation loop
-	status.progress = -1;
+//FUNCTIONS
+export function gameover(status, {}){
+    if (firstRun){
+        endScreenElems.children.forEach((item) => { item.class = ""; });
+    //use other contols button
+        controls.addFuncOnTap(screenClick);
+        firstRun = false;
+    }
+    if (clicked){
+        endScreenElems.children.forEach((item) => { item.class = "hidden"; });
+        status.progress=1;
+    }
 }
