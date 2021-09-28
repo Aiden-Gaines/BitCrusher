@@ -8,6 +8,10 @@ import { startup } from "./startup";
 import { display } from "display";
 // Gamemodes
 import { gmClassic, gmClassicSetup, gmClassicGameEnd } from "./gamemodes/gmClassic";
+import { gmHardcore, gmHardcoreSetup, gmHardcoreGameEnd } from "./gamemodes/gmHardcore";
+import { gmDrunk, gmDrunkSetup, gmDrunkGameEnd } from "./gamemodes/gmDrunk";
+import { gmInfinite, gmInfiniteSetup, gmInfiniteGameEnd } from "./gamemodes/gmInfinite";
+
 import { gameover } from "./gameover";
 import { MainScreen } from "./MainScreen";
 
@@ -17,6 +21,7 @@ const status = {
 	frame: 0,
 	progress: 0,
 	currentRAFFrame: -1,
+	currentGamemode: 40,
 }
 const globals = {
 	// Values based on SVG, will not automatically update when one is changed
@@ -50,19 +55,52 @@ function animate() {
 		case (3):
 			requestAnimationFrame(() => startup(status, globals));
 			break;
-		// 3- Setup for the classic gamemode
-		case (4):
+		// 10- Setup for the classic gamemode
+		case (10):
 			requestAnimationFrame(() => gmClassicSetup(status, globals));
-		// 4- Main loop for the classic gamemode
-		case (5):
+		// 11- Main loop for the classic gamemode
+		case (11):
 			requestAnimationFrame(() => gmClassic(status, globals));
 			break;
-		// 5- Game end for classic gamemode
-		case (6):
+		// 12- Game end for classic gamemode
+		case (12):
 			requestAnimationFrame(() => gmClassicGameEnd(status, globals));
 			break;
-		// 6- Game over screen
-		case (7):
+		// 20- Setup loop for the hardcore gamemode
+		case (20):
+			requestAnimationFrame(() => gmHardcoreSetup(status, globals));
+		// 21- Main loop for the hardcore gamemode
+		case (21):
+			requestAnimationFrame(() => gmHardcore(status, globals));
+			break;
+		// 22- Game end for hardcore gamemode
+		case (22):
+			requestAnimationFrame(() => gmHardcoreGameEnd(status, globals));
+			break;
+		// 30- Setup loop for the infinite gamemode
+		case (30):
+			requestAnimationFrame(() => gmInfiniteSetup(status, globals));
+		// 31- Main loop for the infinite gamemode
+		case (31):
+			requestAnimationFrame(() => gmInfinite(status, globals));
+			break;
+		// 32- Game end for infinite gamemode
+		case (32):
+			requestAnimationFrame(() => gmInfiniteGameEnd(status, globals));
+			break;
+		// 40- Setup loop for the drunk gamemode
+		case (40):
+			requestAnimationFrame(() => gmDrunkSetup(status, globals));
+		// 41- Main loop for the drunk gamemode
+		case (41):
+			requestAnimationFrame(() => gmDrunk(status, globals));
+			break;
+		// 42- Game end for drunk gamemode
+		case (42):
+			requestAnimationFrame(() => gmDrunkGameEnd(status, globals));
+			break;
+		// 100- Game over screen
+		case (100):
 			requestAnimationFrame(() => gameover(status, globals));
 			break;
 	}

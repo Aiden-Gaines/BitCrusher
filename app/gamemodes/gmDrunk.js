@@ -2,7 +2,7 @@
 // IMPORTS
 import * as utils from '../../common/utils';
 import document from 'document';
-//import { gameoverTextElem } from '../gameover';
+import { gameoverTextElem } from '../gameover';
 
 
 // VARIABLES
@@ -13,7 +13,7 @@ const direction = 1;
 const localRowCount = 9;
 const level = 1;
 const shownBricks = [];
-export const activeBricks = [[3, 8], [4, 8], [5, 8]];
+export const activeBricks = [[2,8],[3, 8], [4, 8], [5, 8]];
 
 
 // FUNCTIONS
@@ -78,7 +78,37 @@ function screenClick(evt) {
 	calculateCurrentSpeed();
 }
 
-export function gmClassicSetup(status, { rowCount }) {
+function hslToHex(h, s, l) {
+	h /= 360;
+	s /= 100;
+	l /= 100;
+	let r, g, b;
+	if (s === 0) {
+	  r = g = b = l; // achromatic
+	} else {
+	  const hue2rgb = (p, q, t) => {
+		if (t < 0) t += 1;
+		if (t > 1) t -= 1;
+		if (t < 1 / 6) return p + (q - p) * 6 * t;
+		if (t < 1 / 2) return q;
+		if (t < 2 / 3) return p + (q - p) * (2 / 3 - t) * 6;
+		return p;
+	  };
+	  const q = l < 0.5 ? l * (1 + s) : l + s - l * s;
+	  const p = 2 * l - q;
+	  r = hue2rgb(p, q, h + 1 / 3);
+	  g = hue2rgb(p, q, h);
+	  b = hue2rgb(p, q, h - 1 / 3);
+	}
+	const toHex = x => {
+	  const hex = Math.round(x * 255).toString(16);
+	  return hex.length === 1 ? '0' + hex : hex;
+	};
+	return `#${toHex(r)}${toHex(g)}${toHex(b)}`;
+  }
+
+
+export function gmDrunkSetup(status, { rowCount }) {
 	const myButton = document.getElementById('button-screenwide');
 	const myGradient = document.getElementById('bgGradient');
 	myGradient.gradient.colors.c1 = "red";
@@ -92,8 +122,19 @@ export function gmClassicSetup(status, { rowCount }) {
 	status.progress++; 
 }
 
-export function gmClassic(status, { colCount }) {
-	if (status.frame % speed == 0) {
+
+
+
+const myGradient = document.getElementById('bgGradient');
+
+function getRandomInt(min, max) {
+	min = Math.ceil(min);
+	max = Math.floor(max);
+	return Math.floor(Math.random() * (max - min) + min); //The maximum is exclusive and the minimum is inclusive
+  }
+
+export function gmDrunk(status, { colCount }) {
+	if (status.frame % Math.ceil(Math.random() * speed) == 0) {
 		if (activeBricks.length == 0) {
 			// Last thing ran before starting closing animation loop
 			// Set some variables once before we begin
@@ -107,22 +148,24 @@ export function gmClassic(status, { colCount }) {
 
 		for (const brick of switchBricks) {
 			utils.flip(brick);
+			myGradient.gradient.colors.c1 = hslToHex(getRandomInt(1,360),100,50);
+			myGradient.gradient.colors.c2 = hslToHex(getRandomInt(1,360),100,50);
 		}
 
 		activeBricks = newActiveBricks;
 	}
 }
 
-export function gmClassicGameEnd(status, {}) {
+export function gmDrunkGameEnd(status, {}) {
 	if (status.frame % 3 == 0) {
 		if (endFlashAmt != 0) {
 			flashingBricks.forEach(utils.flip);
 			endFlashAmt--;
 		} else {
-			console.log("pop")
 			if (shownBricks.length != 0) {
 				utils.hide(shownBricks.pop());
 			} else {
+				gameoverTextElem.class = "hidden gameover test";
 				status.progress = 100;
 			}
 		}
