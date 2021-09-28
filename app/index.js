@@ -13,6 +13,7 @@ import { gmDrunk, gmDrunkSetup, gmDrunkGameEnd } from "./gamemodes/gmDrunk";
 import { gmInfinite, gmInfiniteSetup, gmInfiniteGameEnd } from "./gamemodes/gmInfinite";
 
 import { gameover } from "./gameover";
+import { MainScreen } from "./MainScreen";
 
 
 // VARIABLES
@@ -46,8 +47,12 @@ function animate() {
 		case (1):
 			requestAnimationFrame(() => setup(status, globals));
 			break;
-		// 2- Run whatever startup animation we want to have
+		// 1- Main screen
 		case (2):
+			requestAnimationFrame(() => MainScreen(status, globals));
+			break;
+		// 2- Run whatever startup animation we want to have
+		case (3):
 			requestAnimationFrame(() => startup(status, globals));
 			break;
 		// 10- Setup for the classic gamemode
