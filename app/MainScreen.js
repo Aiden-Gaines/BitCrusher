@@ -5,8 +5,8 @@ import * as controls from './controls';
 
 //VARIABLES
 const mainScreenElems = document.getElementsByClassName('MainScreen')[0];
-const clicked = false;
-const firstRun = true;
+let clicked = false;
+let firstRun = true;
 
 
 //FUNCTIONS

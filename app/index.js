@@ -13,7 +13,7 @@ import { gmDrunk, gmDrunkSetup, gmDrunkGameEnd } from "./gamemodes/gmDrunk";
 import { gmInfinite, gmInfiniteSetup, gmInfiniteGameEnd } from "./gamemodes/gmInfinite";
 // Other animation states
 import { gameover } from "./gameover";
-import { MainScreen } from "./MainScreen";
+import { MainScreen } from "./mainScreen";
 
 
 // VARIABLES
