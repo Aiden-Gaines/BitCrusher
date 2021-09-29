@@ -4,7 +4,7 @@ import * as controls from './controls';
 
 
 //VARIABLES
-// const gameScreenElems = document.getElementsByClassName('gamemode-screen')[0];
+const gameScreenElems = document.getElementsByClassName('gamemode-screen')[0];
 let clicked = false;
 let firstRun = true;
 let selectedMode = 0;
@@ -36,7 +36,7 @@ function resetVariables() {
 
 export function gameScreen(status, {}) {
 	if (firstRun){
-		// gameScreenElems.children.forEach((item) => { item.class = ""; });
+		gameScreenElems.children.forEach((item) => { item.class = ""; });
 		controls.onTapCoords(selectClassic, 0, 0, 150, 150);
 		controls.onTapCoords(selectHardcode, 151, 0, 300, 150);
 		controls.onTapCoords(selectInfinite, 0, 150, 150, 300);
@@ -44,7 +44,7 @@ export function gameScreen(status, {}) {
         firstRun = false;
     }
     if (clicked){
-		// gameScreenElems.children.forEach((item) => { item.class = "hidden"; });
+		gameScreenElems.children.forEach((item) => { item.class = "hidden"; });
 		controls.onTapRemove(selectClassic);
 		controls.onTapRemove(selectHardcode);
 		controls.onTapRemove(selectInfinite);
