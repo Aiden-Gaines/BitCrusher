@@ -12,6 +12,7 @@ const speed = 10;
 const direction = 1;
 const localRowCount = 9;
 const level = 1;
+const score = 0;
 const shownBricks = [];
 export const activeBricks = [[3, 8], [4, 8], [5, 8]];
 
@@ -62,8 +63,13 @@ function screenClick(evt) {
 		// "Remove" the bricks that are not on the platform bricks
 		activeBricks = activeBricks.filter(brick => -1 != platformXs.indexOf(brick[0]));
 	}
+	// Add up score
+	score += level * activeBricks.length;
+	console.log("Adding " + level * activeBricks.length + " to score.")
+	console.log("Score: " + score)
 
 	level++;
+
 	// Move active bricks into shown bricks
 	activeBricks.forEach((item) => { shownBricks.push(item); });
 
@@ -78,7 +84,6 @@ function screenClick(evt) {
 	activeBricks = utils.moveBricks(activeBricks, [activeBricks[0][0] * -1, -1]);
 	// Show the newly created active bricks
 	activeBricks.forEach(utils.show);
-
 	// Finish up
 	calculateCurrentSpeed();
 }
@@ -97,7 +102,8 @@ export function gmClassicSetup(status, { rowCount }) {
 }
 
 export function gmClassic(status, { colCount }) {
-	if (status.frame % 5 == 0) {
+	status.score = score;
+	if (status.frame % speed == 0) {
 		if (activeBricks.length == 0) {
 			// Last thing ran before starting closing animation loop
 			// Set some variables once before we begin

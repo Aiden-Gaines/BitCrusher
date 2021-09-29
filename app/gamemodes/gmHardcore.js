@@ -1,16 +1,18 @@
 'use strict';
 // IMPORTS
 import * as utils from '../../common/utils';
+import * as controls from '../controls';
 import document from 'document';
 
 
 // VARIABLES
 let flashingBricks;
 let endFlashAmt = 7;
-const speed = 8;
+const speed = 7;
 const direction = 1;
 const localRowCount = 9;
 const level = 1;
+const score = 0;
 const shownBricks = [];
 export const activeBricks = [[4, 8]];
 
@@ -32,14 +34,18 @@ function getNewActiveBricks(colCount) {
 }
 
 function getBrickRow(gameLevel) {
+	const found = false;
 	const returnBricks = [];
 	const shownIndex = shownBricks.length;
 
 	while (shownIndex--) {
+		// Current brick we are on in the shownBrick array
 		const curBrick = shownBricks[shownIndex];
+		// If the current bricks index is 
 		if (curBrick[1] == (localRowCount - gameLevel)) {
 			returnBricks.push(curBrick);
-		} else {
+			found = true;
+		} else if (found) {
 			break;
 		}
 	}
@@ -56,18 +62,25 @@ function screenClick(evt) {
 		activeBricks.filter(brick => -1 == platformXs.indexOf(brick[0])).forEach(utils.hide);
 		// "Remove" the bricks that are not on the platform bricks
 		activeBricks = activeBricks.filter(brick => -1 != platformXs.indexOf(brick[0]));
-	// This is for the final row, when we don't want to move upwards anymore, and instead trigger the end animation
 	}
 
-	level++;
 
+	// Add up score
+	score += level * activeBricks.length;
+	console.log("Adding " + level * 11 + " to score.")
+	console.log("Score: " + score)
+
+	level++;
+	// Move active bricks into shown bricks
+	activeBricks.forEach((item) => { shownBricks.push(item); });
+
+	// This checks if we are done with the top row and then ends the game
 	if (level > localRowCount) {
+		level++;
 		activeBricks = [];
 		return;
 	}
 
-	// Move active bricks into shown bricks
-	activeBricks.forEach((item) => { shownBricks.push(item); });
 	// Create new active bricks in the new row
 	activeBricks = utils.moveBricks(activeBricks, [activeBricks[0][0] * -1, -1]);
 	// Show the newly created active bricks
@@ -78,20 +91,20 @@ function screenClick(evt) {
 }
 
 export function gmHardcoreSetup(status, { rowCount }) {
-	const myButton = document.getElementById('button-screenwide');
 	const myGradient = document.getElementById('bgGradient');
-	myGradient.gradient.colors.c1 = "red";
-	myGradient.gradient.colors.c2 = "lime";
+	myGradient.gradient.colors.c1 = "gray";
+	myGradient.gradient.colors.c2 = "red";
 	localRowCount = rowCount;
-	myButton.onclick = screenClick;
-
+	
 	activeBricks.forEach(utils.show);
 	calculateCurrentSpeed();
-
+	
+	controls.onTap(screenClick);
 	status.progress++; 
 }
 
 export function gmHardcore(status, { colCount }) {
+	status.score = score;
 	if (status.frame % speed == 0) {
 		if (activeBricks.length == 0) {
 			// Last thing ran before starting closing animation loop
@@ -120,6 +133,7 @@ export function gmHardcoreGameEnd(status, {}) {
 			if (shownBricks.length != 0) {
 				utils.hide(shownBricks.pop());
 			} else {
+				controls.onTapRemove(screenClick);
 				status.progress = 100;
 			}
 		}
