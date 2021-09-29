@@ -92,12 +92,12 @@
 			gradient-color2="lime" />
 		</svg>
 	<!-- GAMEOVER -->
-	<svg class="endScreen">
+	<svg class="gameover-screen">
 		<image class="hidden" href="gameover.png"  />
 	</svg>
 	<!-- MAIN SCREEN BUTTON AND IMAGE -->
-	<svg class="MainScreen">
-		<image class="hidden" href="logo.png"  />
+	<svg class="mainmenu-screen">
+		<image class="hidden" href="mainmenu.png"  />
 	</svg>
 	<!-- SCROLLABLE BUTTONS  -->
 	<!-- <svg>

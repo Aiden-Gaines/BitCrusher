@@ -4,7 +4,7 @@ import * as controls from './controls';
 
 
 //VARIABLES
-const endScreenElems = document.getElementsByClassName('endScreen')[0];
+const endScreenElems = document.getElementsByClassName('gameover-screen')[0];
 let clicked = false;
 let firstRun = true;
 

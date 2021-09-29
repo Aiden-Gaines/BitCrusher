@@ -4,7 +4,7 @@ import * as controls from './controls';
 
 
 //VARIABLES
-const mainScreenElems = document.getElementsByClassName('MainScreen')[0];
+const mainScreenElems = document.getElementsByClassName('mainmenu-screen')[0];
 let clicked = false;
 let firstRun = true;
 
