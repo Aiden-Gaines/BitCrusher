@@ -84,7 +84,8 @@ function hslToHex(h, s, l) {
 
 
 const myGradient = document.getElementById('bgGradient');
-
+const scoreText = document.getElementById("current-score-text");
+const finalScoreText = document.getElementById("final-score-text");
 const lastHue1 = 0;
 const lastHue2 = 50;
 
@@ -129,6 +130,7 @@ function screenClick(evt) {
 	score += level * activeBricks.length;
 	console.log("Adding " + level * activeBricks.length + " to score.")
 	console.log("Score: " + score)
+	scoreText.text = "Score: " + String(score);
 
 	level++;
 	// Move active bricks into shown bricks
@@ -158,7 +160,7 @@ export function gmDrunkSetup(status, { rowCount }) {
 	
 	activeBricks.forEach(utils.show);
 	calculateCurrentSpeed();
-	
+	scoreText.text = "Score: 0"
 	controls.onTap(screenClick);
 	status.progress++; 
 }

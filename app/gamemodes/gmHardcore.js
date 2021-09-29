@@ -14,6 +14,8 @@ let level = 1;
 let score = 0;
 let shownBricks = [];
 const localRowCount = 9;
+const scoreText = document.getElementById("current-score-text");
+const finalScoreText = document.getElementById("final-score-text");
 export let activeBricks = [[4, 8]];
 
 
@@ -80,6 +82,7 @@ function screenClick(evt) {
 	score += level * activeBricks.length;
 	console.log("Adding " + level * 11 + " to score.")
 	console.log("Score: " + score)
+	scoreText.text = "Score: " + String(score);
 
 	level++;
 	// Move active bricks into shown bricks
@@ -109,7 +112,7 @@ export function gmHardcoreSetup(status, { rowCount }) {
 	
 	activeBricks.forEach(utils.show);
 	calculateCurrentSpeed();
-	
+	scoreText.text = "Score: 0"
 	controls.onTap(screenClick);
 	status.progress++; 
 }

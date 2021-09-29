@@ -108,6 +108,14 @@
 		<rect width="100%" height="100%" fill="black"/>
 		<text y="17" id="frames-text" fill="red" font-size="20">-1</text>
 	</svg> -->
+
+	<!-- Score Text-->
+	<svg>
+		<text y="17" x="50%" text-anchor="middle" text-align="center" id="current-score-text" text-length="15" fill="white" font-size="20"></text>
+	</svg>
+	<svg>
+		<text y="160" x="50%" text-anchor="middle" text-align="center" id="final-score-text" text-length="15" fill="white" font-size="40"></text>
+	</svg>
 	<!-- CONTROLS | Must be at the bottom! -->
 	<svg>
 		<use href="#push-button" class="hidden" height="100%" width="100%" id="button-screenwide" />

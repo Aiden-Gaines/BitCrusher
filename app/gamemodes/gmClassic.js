@@ -14,6 +14,8 @@ let level = 1;
 let score = 0;
 let shownBricks = [];
 const localRowCount = 9;
+const scoreText = document.getElementById("current-score-text");
+const finalScoreText = document.getElementById("final-score-text");
 export let activeBricks = [[3, 8], [4, 8], [5, 8]];
 
 
@@ -73,10 +75,12 @@ function screenClick(evt) {
 		// "Remove" the bricks that are not on the platform bricks
 		activeBricks = activeBricks.filter(brick => -1 != platformXs.indexOf(brick[0]));
 	}
-	// Add up score
+	// Add up & update score
 	score += level * activeBricks.length;
 	console.log("Adding " + level * activeBricks.length + " to score.")
 	console.log("Score: " + score)
+
+	scoreText.text = "Score: " + String(score);
 
 	level++;
 
@@ -102,11 +106,13 @@ export function gmClassicSetup(status, { rowCount }) {
 	const myGradient = document.getElementById('bgGradient');
 	myGradient.gradient.colors.c1 = "red";
 	myGradient.gradient.colors.c2 = "lime";
+	scoreText.style.fill = "white";
 	localRowCount = rowCount;
 	
 	activeBricks.forEach(utils.show);
 	calculateCurrentSpeed();
-	
+
+	scoreText.text = "Score: 0"
 	controls.onTap(screenClick);
 	status.progress++; 
 }
