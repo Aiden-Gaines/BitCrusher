@@ -19,8 +19,8 @@ import { MainScreen } from "./mainScreen";
 
 // VARIABLES
 // Debug variables for showing frames
-let time = new Date().getTime();
-const frameText = document.getElementById('frames-text');
+// let time = new Date().getTime();
+// const frameText = document.getElementById('frames-text');
 // Variables for sharing information between files
 const status = {
 	frame: 0,
@@ -65,14 +65,14 @@ const globals = {
 
 // FUNCTIONS
 // Used to display the current fps in the corner of the screen
-function showFrames() {
-	const curTime = new Date().getTime();
-	frameText.text = Math.round(1000 / (curTime - time));
-	time = curTime;
-}
+// function showFrames() {
+// 	const curTime = new Date().getTime();
+// 	frameText.text = Math.round(1000 / (curTime - time));
+// 	time = curTime;
+// }
 
 function animate() {
-	showFrames();
+	// showFrames();
 	// Call this function on the next frame to complete the loop.   -Must be first thing done, so that the other rAF call gets completed before this one on the next frame
 	status.currentRafFrame = requestAnimationFrame(animate);
 	// console.log(`Running progress: ${status.progress} frame: ${status.frame}`);
