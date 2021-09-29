@@ -37,10 +37,10 @@ function resetVariables() {
 export function gameScreen(status, {}) {
 	if (firstRun){
 		gameScreenElems.children.forEach((item) => { item.class = ""; });
-		controls.onTapCoords(selectClassic, 0, 0, 150, 150);
-		controls.onTapCoords(selectHardcode, 151, 0, 300, 150);
-		controls.onTapCoords(selectInfinite, 0, 150, 150, 300);
-		controls.onTapCoords(selectDrunk, 151, 151, 300, 300);
+		controls.onTapCoords(selectClassic, 0, 0, 300, 75);
+		controls.onTapCoords(selectHardcode, 0, 75, 300, 150);
+		controls.onTapCoords(selectInfinite, 0, 150, 300, 225);
+		controls.onTapCoords(selectDrunk, 0, 225, 300, 300);
         firstRun = false;
     }
     if (clicked){
