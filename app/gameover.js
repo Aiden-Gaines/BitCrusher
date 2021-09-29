@@ -14,6 +14,11 @@ let firstRun = true;
 //FUNCTIONS
 function screenClick(evt) { clicked = true; }
 
+function resetVariables() {
+	clicked = false;
+	firstRun = true;
+}
+
 export function gameover(status, { progressStates }) {
 	if (firstRun){
 		//Hide top score text and show final score
@@ -29,6 +34,7 @@ export function gameover(status, { progressStates }) {
 		finalScoreText.text = "";
 		endScreenElems.children.forEach((item) => { item.class = 'hidden'; });
 		controls.onTapRemove(screenClick);
-		status.progress = progressStates.mainMenuScreen;
+		resetVariables();
+		status.progress = progressStates.mainMenuSetupScreen;
 	}
 }

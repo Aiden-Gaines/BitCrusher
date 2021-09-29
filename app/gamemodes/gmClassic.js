@@ -8,13 +8,15 @@ import document from 'document';
 // VARIABLES
 let flashingBricks;
 let endFlashAmt = 7;
-const speed = 10;
-const direction = 1;
+let speed = 10;
+let direction = 1;
+let level = 1;
+let score = 0;
+let shownBricks = [];
 const localRowCount = 9;
-const level = 1;
-const score = 0;
-const shownBricks = [];
-export const activeBricks = [[3, 8], [4, 8], [5, 8]];
+const scoreText = document.getElementById("current-score-text");
+const finalScoreText = document.getElementById("final-score-text");
+export let activeBricks = [[3, 8], [4, 8], [5, 8]];
 
 
 // FUNCTIONS
@@ -53,8 +55,15 @@ function getBrickRow(gameLevel) {
 	return returnBricks;
 }
 
-const scoreText = document.getElementById("current-score-text");
-const finalScoreText = document.getElementById("final-score-text");
+function resetVariables() {
+	endFlashAmt = 7;
+	speed = 10;
+	direction = 1;
+	level = 1;
+	score = 0;
+	shownBricks = [];
+	activeBricks = [[3, 8], [4, 8], [5, 8]];
+}
 
 function screenClick(evt) {
 	// Don't do this for the first level because they can be placed anywhere
@@ -139,6 +148,7 @@ export function gmClassicGameEnd(status, {}) {
 				utils.hide(shownBricks.pop());
 			} else {
 				controls.onTapRemove(screenClick);
+				resetVariables();
 				status.progress = 100;
 			}
 		}

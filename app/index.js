@@ -14,7 +14,8 @@ import { gmDrunk, gmDrunkSetup, gmDrunkGameEnd } from "./gamemodes/gmDrunk";
 import { gmInfinite, gmInfiniteSetup, gmInfiniteGameEnd } from "./gamemodes/gmInfinite";
 // Other animation states
 import { gameover } from "./gameover";
-import { MainScreen } from "./mainScreen";
+import { mainMenu, mainMenuSetup } from "./mainScreen";
+import { gameScreen } from "./gamemodesScreen";
 
 
 // VARIABLES
@@ -26,7 +27,7 @@ const status = {
 	frame: 0,
 	progress: 0,
 	currentRAFFrame: -1,
-	currentGamemode: 40,
+	currentGamemode: 10,
 	score: 0,
 }
 const globals = {
@@ -35,8 +36,10 @@ const globals = {
 		// Misc Animation States
 		killState: -1,
 		gameboardSetup: 1,
-		mainMenuScreen: 2,
-		gmTransition: 3,
+		mainMenuSetupScreen: 2,
+		mainMenuScreen: 3,
+		gameScreen: 4,
+		gmTransition: 5,
 		gameoverScreen: 100,
 		// Classic gamemode
 		gmClassicSetup: 10,
@@ -86,9 +89,17 @@ function animate() {
 		case (globals.progressStates.gameboardSetup):
 			requestAnimationFrame(() => setup(status, globals));
 			break;
+		// Main menu setup
+		case (globals.progressStates.mainMenuSetupScreen):
+			requestAnimationFrame(() => mainMenuSetup(status, globals));
+			break;
 		// Main screen
 		case (globals.progressStates.mainMenuScreen):
-			requestAnimationFrame(() => MainScreen(status, globals));
+			requestAnimationFrame(() => mainMenu(status, globals));
+			break;
+		// Gamemode select screen
+		case (globals.progressStates.gameScreen):
+			requestAnimationFrame(() => gameScreen(status, globals));
 			break;
 		// Run whatever gamemode transition animation we want to have
 		case (globals.progressStates.gmTransition):
