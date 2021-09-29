@@ -46,6 +46,9 @@ export function gameScreen(status, {}) {
     if (clicked){
 		// gameScreenElems.children.forEach((item) => { item.class = "hidden"; });
 		controls.onTapRemove(selectClassic);
+		controls.onTapRemove(selectHardcode);
+		controls.onTapRemove(selectInfinite);
+		controls.onTapRemove(selectDrunk);
 		resetVariables();
 		status.currentGamemode = selectedMode;
         status.progress++;

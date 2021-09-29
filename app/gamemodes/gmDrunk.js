@@ -13,7 +13,12 @@ let direction = 1;
 let level = 1;
 let score = 0;
 let shownBricks = [];
+let lastHue1 = 0;
+let lastHue2 = 50;
 const localRowCount = 9;
+const myGradient = document.getElementById('bgGradient');
+const scoreText = document.getElementById("current-score-text");
+const finalScoreText = document.getElementById("final-score-text");
 export let activeBricks = [[3, 8], [4, 8], [5, 8]];
 
 
@@ -82,13 +87,6 @@ function hslToHex(h, s, l) {
 	return `#${toHex(r)}${toHex(g)}${toHex(b)}`;
 }
 
-
-const myGradient = document.getElementById('bgGradient');
-const scoreText = document.getElementById("current-score-text");
-const finalScoreText = document.getElementById("final-score-text");
-const lastHue1 = 0;
-const lastHue2 = 50;
-
 function shiftHue(amount) {
 	//console.log("Current Colors: " + lastHue1 + " and " + lastHue2);
 	lastHue1 = lastHue1 + amount
@@ -111,6 +109,8 @@ function resetVariables() {
 	level = 1;
 	score = 0;
 	shownBricks = [];
+	lastHue1 = 0;
+	lastHue2 = 50;
 	activeBricks = [[3, 8], [4, 8], [5, 8]];
 }
 
