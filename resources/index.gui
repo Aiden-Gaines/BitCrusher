@@ -1,87 +1,87 @@
 <svg>
 	<!-- BRICKS -->
 		<mask id="mask">
-			<use id="r0c0" href="#brick"/>
-			<use id="r0c1" href="#brick"/>
-			<use id="r0c2" href="#brick"/>
-			<use id="r0c3" href="#brick"/>
-			<use id="r0c4" href="#brick"/>
-			<use id="r0c5" href="#brick"/>
-			<use id="r0c6" href="#brick"/>
-			<use id="r0c7" href="#brick"/>
-			<use id="r0c8" href="#brick"/>
-			<use id="r1c0" href="#brick"/>
-			<use id="r1c1" href="#brick"/>
-			<use id="r1c2" href="#brick"/>
-			<use id="r1c3" href="#brick"/>
-			<use id="r1c4" href="#brick"/>
-			<use id="r1c5" href="#brick"/>
-			<use id="r1c6" href="#brick"/>
-			<use id="r1c7" href="#brick"/>
-			<use id="r1c8" href="#brick"/>
-			<use id="r2c0" href="#brick"/>
-			<use id="r2c1" href="#brick"/>
-			<use id="r2c2" href="#brick"/>
-			<use id="r2c3" href="#brick"/>
-			<use id="r2c4" href="#brick"/>
-			<use id="r2c5" href="#brick"/>
-			<use id="r2c6" href="#brick"/>
-			<use id="r2c7" href="#brick"/>
-			<use id="r2c8" href="#brick"/>
-			<use id="r3c0" href="#brick"/>
-			<use id="r3c1" href="#brick"/>
-			<use id="r3c2" href="#brick"/>
-			<use id="r3c3" href="#brick"/>
-			<use id="r3c4" href="#brick"/>
-			<use id="r3c5" href="#brick"/>
-			<use id="r3c6" href="#brick"/>
-			<use id="r3c7" href="#brick"/>
-			<use id="r3c8" href="#brick"/>
-			<use id="r4c0" href="#brick"/>
-			<use id="r4c1" href="#brick"/>
-			<use id="r4c2" href="#brick"/>
-			<use id="r4c3" href="#brick"/>
-			<use id="r4c4" href="#brick"/>
-			<use id="r4c5" href="#brick"/>
-			<use id="r4c6" href="#brick"/>
-			<use id="r4c7" href="#brick"/>
-			<use id="r4c8" href="#brick"/>
-			<use id="r5c0" href="#brick"/>
-			<use id="r5c1" href="#brick"/>
-			<use id="r5c2" href="#brick"/>
-			<use id="r5c3" href="#brick"/>
-			<use id="r5c4" href="#brick"/>
-			<use id="r5c5" href="#brick"/>
-			<use id="r5c6" href="#brick"/>
-			<use id="r5c7" href="#brick"/>
-			<use id="r5c8" href="#brick"/>
-			<use id="r6c0" href="#brick"/>
-			<use id="r6c1" href="#brick"/>
-			<use id="r6c2" href="#brick"/>
-			<use id="r6c3" href="#brick"/>
-			<use id="r6c4" href="#brick"/>
-			<use id="r6c5" href="#brick"/>
-			<use id="r6c6" href="#brick"/>
-			<use id="r6c7" href="#brick"/>
-			<use id="r6c8" href="#brick"/>
-			<use id="r7c0" href="#brick"/>
-			<use id="r7c1" href="#brick"/>
-			<use id="r7c2" href="#brick"/>
-			<use id="r7c3" href="#brick"/>
-			<use id="r7c4" href="#brick"/>
-			<use id="r7c5" href="#brick"/>
-			<use id="r7c6" href="#brick"/>
-			<use id="r7c7" href="#brick"/>
-			<use id="r7c8" href="#brick"/>
-			<use id="r8c0" href="#brick"/>
-			<use id="r8c1" href="#brick"/>
-			<use id="r8c2" href="#brick"/>
-			<use id="r8c3" href="#brick"/>
-			<use id="r8c4" href="#brick"/>
-			<use id="r8c5" href="#brick"/>
-			<use id="r8c6" href="#brick"/>
-			<use id="r8c7" href="#brick"/>
-			<use id="r8c8" href="#brick"/>
+			<use class="hidden" id="r0c0" href="#brick"/>
+			<use class="hidden" id="r0c1" href="#brick"/>
+			<use class="hidden" id="r0c2" href="#brick"/>
+			<use class="hidden" id="r0c3" href="#brick"/>
+			<use class="hidden" id="r0c4" href="#brick"/>
+			<use class="hidden" id="r0c5" href="#brick"/>
+			<use class="hidden" id="r0c6" href="#brick"/>
+			<use class="hidden" id="r0c7" href="#brick"/>
+			<use class="hidden" id="r0c8" href="#brick"/>
+			<use class="hidden" id="r1c0" href="#brick"/>
+			<use class="hidden" id="r1c1" href="#brick"/>
+			<use class="hidden" id="r1c2" href="#brick"/>
+			<use class="hidden" id="r1c3" href="#brick"/>
+			<use class="hidden" id="r1c4" href="#brick"/>
+			<use class="hidden" id="r1c5" href="#brick"/>
+			<use class="hidden" id="r1c6" href="#brick"/>
+			<use class="hidden" id="r1c7" href="#brick"/>
+			<use class="hidden" id="r1c8" href="#brick"/>
+			<use class="hidden" id="r2c0" href="#brick"/>
+			<use class="hidden" id="r2c1" href="#brick"/>
+			<use class="hidden" id="r2c2" href="#brick"/>
+			<use class="hidden" id="r2c3" href="#brick"/>
+			<use class="hidden" id="r2c4" href="#brick"/>
+			<use class="hidden" id="r2c5" href="#brick"/>
+			<use class="hidden" id="r2c6" href="#brick"/>
+			<use class="hidden" id="r2c7" href="#brick"/>
+			<use class="hidden" id="r2c8" href="#brick"/>
+			<use class="hidden" id="r3c0" href="#brick"/>
+			<use class="hidden" id="r3c1" href="#brick"/>
+			<use class="hidden" id="r3c2" href="#brick"/>
+			<use class="hidden" id="r3c3" href="#brick"/>
+			<use class="hidden" id="r3c4" href="#brick"/>
+			<use class="hidden" id="r3c5" href="#brick"/>
+			<use class="hidden" id="r3c6" href="#brick"/>
+			<use class="hidden" id="r3c7" href="#brick"/>
+			<use class="hidden" id="r3c8" href="#brick"/>
+			<use class="hidden" id="r4c0" href="#brick"/>
+			<use class="hidden" id="r4c1" href="#brick"/>
+			<use class="hidden" id="r4c2" href="#brick"/>
+			<use class="hidden" id="r4c3" href="#brick"/>
+			<use class="hidden" id="r4c4" href="#brick"/>
+			<use class="hidden" id="r4c5" href="#brick"/>
+			<use class="hidden" id="r4c6" href="#brick"/>
+			<use class="hidden" id="r4c7" href="#brick"/>
+			<use class="hidden" id="r4c8" href="#brick"/>
+			<use class="hidden" id="r5c0" href="#brick"/>
+			<use class="hidden" id="r5c1" href="#brick"/>
+			<use class="hidden" id="r5c2" href="#brick"/>
+			<use class="hidden" id="r5c3" href="#brick"/>
+			<use class="hidden" id="r5c4" href="#brick"/>
+			<use class="hidden" id="r5c5" href="#brick"/>
+			<use class="hidden" id="r5c6" href="#brick"/>
+			<use class="hidden" id="r5c7" href="#brick"/>
+			<use class="hidden" id="r5c8" href="#brick"/>
+			<use class="hidden" id="r6c0" href="#brick"/>
+			<use class="hidden" id="r6c1" href="#brick"/>
+			<use class="hidden" id="r6c2" href="#brick"/>
+			<use class="hidden" id="r6c3" href="#brick"/>
+			<use class="hidden" id="r6c4" href="#brick"/>
+			<use class="hidden" id="r6c5" href="#brick"/>
+			<use class="hidden" id="r6c6" href="#brick"/>
+			<use class="hidden" id="r6c7" href="#brick"/>
+			<use class="hidden" id="r6c8" href="#brick"/>
+			<use class="hidden" id="r7c0" href="#brick"/>
+			<use class="hidden" id="r7c1" href="#brick"/>
+			<use class="hidden" id="r7c2" href="#brick"/>
+			<use class="hidden" id="r7c3" href="#brick"/>
+			<use class="hidden" id="r7c4" href="#brick"/>
+			<use class="hidden" id="r7c5" href="#brick"/>
+			<use class="hidden" id="r7c6" href="#brick"/>
+			<use class="hidden" id="r7c7" href="#brick"/>
+			<use class="hidden" id="r7c8" href="#brick"/>
+			<use class="hidden" id="r8c0" href="#brick"/>
+			<use class="hidden" id="r8c1" href="#brick"/>
+			<use class="hidden" id="r8c2" href="#brick"/>
+			<use class="hidden" id="r8c3" href="#brick"/>
+			<use class="hidden" id="r8c4" href="#brick"/>
+			<use class="hidden" id="r8c5" href="#brick"/>
+			<use class="hidden" id="r8c6" href="#brick"/>
+			<use class="hidden" id="r8c7" href="#brick"/>
+			<use class="hidden" id="r8c8" href="#brick"/>
 		</mask>
 		<svg mask="#mask" width="100%" height="100%">
 			<gradientRect id="bgGradient" width="100%" height="100%"
@@ -108,6 +108,14 @@
 		<rect width="100%" height="100%" fill="black"/>
 		<text y="17" id="frames-text" fill="red" font-size="20">-1</text>
 	</svg> -->
+
+	<!-- Score Text-->
+	<svg>
+		<text y="17" x="50%" text-anchor="middle" text-align="center" id="current-score-text" text-length="15" fill="white" font-size="20"></text>
+	</svg>
+	<svg>
+		<text y="160" x="50%" text-anchor="middle" text-align="center" id="final-score-text" text-length="15" fill="white" font-size="40"></text>
+	</svg>
 	<!-- CONTROLS | Must be at the bottom! -->
 	<svg>
 		<use href="#push-button" class="hidden" height="100%" width="100%" id="button-screenwide" />

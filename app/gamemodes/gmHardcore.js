@@ -8,13 +8,15 @@ import document from 'document';
 // VARIABLES
 let flashingBricks;
 let endFlashAmt = 7;
-const speed = 7;
-const direction = 1;
+let speed = 7;
+let direction = 1;
+let level = 1;
+let score = 0;
+let shownBricks = [];
 const localRowCount = 9;
-const level = 1;
-const score = 0;
-const shownBricks = [];
-export const activeBricks = [[4, 8]];
+const scoreText = document.getElementById("current-score-text");
+const finalScoreText = document.getElementById("final-score-text");
+export let activeBricks = [[4, 8]];
 
 
 // FUNCTIONS
@@ -53,6 +55,17 @@ function getBrickRow(gameLevel) {
 	return returnBricks;
 }
 
+function resetVariables() {
+	flashingBricks;
+	endFlashAmt = 7;
+	speed = 7;
+	direction = 1;
+	level = 1;
+	score = 0;
+	shownBricks = [];
+	activeBricks = [[4, 8]];
+}
+
 function screenClick(evt) {
 	// Don't do this for the first level because they can be placed anywhere
 	if (level > 1) {
@@ -69,6 +82,7 @@ function screenClick(evt) {
 	score += level * activeBricks.length;
 	console.log("Adding " + level * 11 + " to score.")
 	console.log("Score: " + score)
+	scoreText.text = "Score: " + String(score);
 
 	level++;
 	// Move active bricks into shown bricks
@@ -98,7 +112,7 @@ export function gmHardcoreSetup(status, { rowCount }) {
 	
 	activeBricks.forEach(utils.show);
 	calculateCurrentSpeed();
-	
+	scoreText.text = "Score: 0"
 	controls.onTap(screenClick);
 	status.progress++; 
 }
@@ -134,6 +148,7 @@ export function gmHardcoreGameEnd(status, {}) {
 				utils.hide(shownBricks.pop());
 			} else {
 				controls.onTapRemove(screenClick);
+				resetVariables();
 				status.progress = 100;
 			}
 		}

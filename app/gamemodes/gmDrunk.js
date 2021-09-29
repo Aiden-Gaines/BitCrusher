@@ -8,13 +8,18 @@ import document from 'document';
 // VARIABLES
 let flashingBricks;
 let endFlashAmt = 7;
-const speed = 15;
-const direction = 1;
+let speed = 15;
+let direction = 1;
+let level = 1;
+let score = 0;
+let shownBricks = [];
+let lastHue1 = 0;
+let lastHue2 = 50;
 const localRowCount = 9;
-const level = 1;
-const score = 0;
-const shownBricks = [];
-export const activeBricks = [[3, 8], [4, 8], [5, 8]];
+const myGradient = document.getElementById('bgGradient');
+const scoreText = document.getElementById("current-score-text");
+const finalScoreText = document.getElementById("final-score-text");
+export let activeBricks = [[3, 8], [4, 8], [5, 8]];
 
 
 // FUNCTIONS
@@ -82,12 +87,6 @@ function hslToHex(h, s, l) {
 	return `#${toHex(r)}${toHex(g)}${toHex(b)}`;
 }
 
-
-const myGradient = document.getElementById('bgGradient');
-
-const lastHue1 = 0;
-const lastHue2 = 50;
-
 function shiftHue(amount) {
 	//console.log("Current Colors: " + lastHue1 + " and " + lastHue2);
 	lastHue1 = lastHue1 + amount
@@ -102,6 +101,18 @@ function shiftHue(amount) {
 	myGradient.gradient.colors.c2 = hslToHex(lastHue2,100,50);
 }
 
+function resetVariables() {
+	flashingBricks;
+	endFlashAmt = 7;
+	speed = 15;
+	direction = 1;
+	level = 1;
+	score = 0;
+	shownBricks = [];
+	lastHue1 = 0;
+	lastHue2 = 50;
+	activeBricks = [[3, 8], [4, 8], [5, 8]];
+}
 
 function screenClick(evt) {
 	// Don't do this for the first level because they can be placed anywhere
@@ -119,6 +130,7 @@ function screenClick(evt) {
 	score += level * activeBricks.length;
 	console.log("Adding " + level * activeBricks.length + " to score.")
 	console.log("Score: " + score)
+	scoreText.text = "Score: " + String(score);
 
 	level++;
 	// Move active bricks into shown bricks
@@ -148,7 +160,7 @@ export function gmDrunkSetup(status, { rowCount }) {
 	
 	activeBricks.forEach(utils.show);
 	calculateCurrentSpeed();
-	
+	scoreText.text = "Score: 0"
 	controls.onTap(screenClick);
 	status.progress++; 
 }
@@ -187,6 +199,7 @@ export function gmDrunkGameEnd(status, {}) {
 				utils.hide(shownBricks.pop());
 			} else {
 				controls.onTapRemove(screenClick);
+				resetVariables();
 				status.progress = 100;
 			}
 		}

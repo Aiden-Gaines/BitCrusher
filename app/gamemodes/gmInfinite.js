@@ -8,14 +8,19 @@ import document from 'document';
 // VARIABLES
 let flashingBricks;
 let endFlashAmt = 7;
-const speed = 10;
-const direction = 1;
+let speed = 10;
+let direction = 1;
+let level = 4;
+let levelscompleted = 0;
+let score = 0;
+let shownBricks = [[3, 8], [4, 8], [5, 8],[3, 7], [4, 7], [5, 7],[3, 6], [4, 6], [5, 6],[3, 5], [4, 5], [5, 5]];
+let lastHue1 = 50;
+let lastHue2 = 150;
 const localRowCount = 9;
-const level = 4;
-const levelscompleted = 0;
-const score = 0;
-const shownBricks = [[3, 8], [4, 8], [5, 8],[3, 7], [4, 7], [5, 7],[3, 6], [4, 6], [5, 6],[3, 5], [4, 5], [5, 5]];
-export const activeBricks = [[3, 4], [4, 4], [5, 4]];
+const myGradient = document.getElementById('bgGradient');
+const scoreText = document.getElementById("current-score-text");
+const finalScoreText = document.getElementById("final-score-text");
+export let activeBricks = [[3, 4], [4, 4], [5, 4]];
 
 
 // FUNCTIONS
@@ -83,12 +88,6 @@ function hslToHex(h, s, l) {
 	return `#${toHex(r)}${toHex(g)}${toHex(b)}`;
 }
 
-
-const myGradient = document.getElementById('bgGradient');
-
-const lastHue1 = 50;
-const lastHue2 = 150;
-
 function shiftHue(amount) {
 	console.log("Current Colors: " + lastHue1 + " and " + lastHue2);
 	lastHue1 = lastHue1 - amount
@@ -103,6 +102,19 @@ function shiftHue(amount) {
 	myGradient.gradient.colors.c2 = hslToHex(lastHue2,100,50);
 }
 
+function resetVariables() {
+	flashingBricks;
+	endFlashAmt = 7;
+	speed = 10;
+	direction = 1;
+	level = 4;
+	levelscompleted = 0;
+	score = 0;
+	shownBricks = [[3, 8], [4, 8], [5, 8],[3, 7], [4, 7], [5, 7],[3, 6], [4, 6], [5, 6],[3, 5], [4, 5], [5, 5]];
+	lastHue1 = 50;
+	lastHue2 = 150;
+	activeBricks = [[3, 4], [4, 4], [5, 4]];
+}
 
 function screenClick(evt) {
 	// Shifting the background color gradient to give the illusion as if you were going up
@@ -143,6 +155,7 @@ function screenClick(evt) {
 	score += level * activeBricks.length;
 	console.log("Adding " + levelscompleted * activeBricks.length + " to score.")
 	console.log("Score: " + score)
+	scoreText.text = "Score: " + String(score);
 
 	// Finish up
 	calculateCurrentSpeed();
@@ -156,7 +169,7 @@ export function gmInfiniteSetup(status, { rowCount }) {
 	shownBricks.forEach(utils.show);
 	activeBricks.forEach(utils.show);
 	calculateCurrentSpeed();
-	
+	scoreText.text = "Score: 0"
 	controls.onTap(screenClick);
 	status.progress++; 
 }
@@ -192,6 +205,7 @@ export function gmInfiniteGameEnd(status, {}) {
 				utils.hide(shownBricks.pop());
 			} else {
 				controls.onTapRemove(screenClick);
+				resetVariables();
 				status.progress = 100;
 			}
 		}
