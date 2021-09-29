@@ -138,10 +138,10 @@ function screenClick(evt) {
 	for (const brick of switchBricks) {
 		utils.flip(brick);
 	}
-	console.log("Done!")
+	// console.log("Done!")
 	// Move active bricks into shown bricks
 	activeBricks.forEach((item) => { shownBricks.push(item); });
-	console.log("Active Bricks: " + activeBricks)
+	// console.log("Active Bricks: " + activeBricks)
 
 	// Create new active bricks
 	activeBricks = utils.moveBricks(activeBricks, [activeBricks[0][0] * 0, 0]);
@@ -153,8 +153,8 @@ function screenClick(evt) {
 	levelscompleted += 1
 
 	score += level * activeBricks.length;
-	console.log("Adding " + levelscompleted * activeBricks.length + " to score.")
-	console.log("Score: " + score)
+	// console.log("Adding " + levelscompleted * activeBricks.length + " to score.")
+	// console.log("Score: " + score)
 	scoreText.text = "Score: " + String(score);
 
 	// Finish up

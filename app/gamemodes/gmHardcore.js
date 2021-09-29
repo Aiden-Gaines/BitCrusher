@@ -80,8 +80,8 @@ function screenClick(evt) {
 
 	// Add up score
 	score += level * 3;
-	console.log("Adding " + level * 3 + " to score.")
-	console.log("Score: " + score)
+	// console.log("Adding " + level * 3 + " to score.")
+	// console.log("Score: " + score)
 	scoreText.text = "Score: " + String(score);
 
 	level++;

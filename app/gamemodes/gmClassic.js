@@ -77,8 +77,8 @@ function screenClick(evt) {
 	}
 	// Add up & update score
 	score += level * activeBricks.length;
-	console.log("Adding " + level * activeBricks.length + " to score.")
-	console.log("Score: " + score)
+	// console.log("Adding " + level * activeBricks.length + " to score.")
+	// console.log("Score: " + score)
 
 	scoreText.text = "Score: " + String(score);
 
