@@ -8,13 +8,13 @@ import document from 'document';
 // VARIABLES
 let flashingBricks;
 let endFlashAmt = 7;
-const speed = 15;
-const direction = 1;
+let speed = 15;
+let direction = 1;
+let level = 1;
+let score = 0;
+let shownBricks = [];
 const localRowCount = 9;
-const level = 1;
-const score = 0;
-const shownBricks = [];
-export const activeBricks = [[3, 8], [4, 8], [5, 8]];
+export let activeBricks = [[3, 8], [4, 8], [5, 8]];
 
 
 // FUNCTIONS
@@ -102,6 +102,16 @@ function shiftHue(amount) {
 	myGradient.gradient.colors.c2 = hslToHex(lastHue2,100,50);
 }
 
+function resetVariables() {
+	flashingBricks;
+	endFlashAmt = 7;
+	speed = 15;
+	direction = 1;
+	level = 1;
+	score = 0;
+	shownBricks = [];
+	activeBricks = [[3, 8], [4, 8], [5, 8]];
+}
 
 function screenClick(evt) {
 	// Don't do this for the first level because they can be placed anywhere
@@ -187,6 +197,7 @@ export function gmDrunkGameEnd(status, {}) {
 				utils.hide(shownBricks.pop());
 			} else {
 				controls.onTapRemove(screenClick);
+				resetVariables();
 				status.progress = 100;
 			}
 		}

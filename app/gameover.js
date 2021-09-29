@@ -12,6 +12,11 @@ let firstRun = true;
 //FUNCTIONS
 function screenClick(evt) { clicked = true; }
 
+function resetVariables() {
+	clicked = false;
+	firstRun = true;
+}
+
 export function gameover(status, { progressStates }) {
 	if (firstRun){
 		endScreenElems.children.forEach((item) => { item.class = ''; });
@@ -22,6 +27,7 @@ export function gameover(status, { progressStates }) {
 	if (clicked) {
 		endScreenElems.children.forEach((item) => { item.class = 'hidden'; });
 		controls.onTapRemove(screenClick);
-		status.progress = progressStates.mainMenuScreen;
+		resetVariables();
+		status.progress = progressStates.mainMenuSetupScreen;
 	}
 }
