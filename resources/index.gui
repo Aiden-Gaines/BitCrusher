@@ -99,23 +99,10 @@
 	<svg class="mainmenu-screen">
 		<image class="hidden" href="mainmenu.png"  />
 	</svg>
-	<!-- SCROLLABLE BUTTONS  -->
-	<!-- <svg>
-		<use href="#scrollview">
-			<use href="#scrollview-item" height="200">
-				<rect width="100%" height="100%" fill="fb-cyan" />
-				<text>Gamemode 1</text>
-			</use>
-			<use href="#scrollview-item" height="200">
-				<rect width="100%" height="100%" fill="fb-red" />
-				<text>Gamemode 2</text>
-			</use>
-			<use href="#scrollview-item" height="200">
-				<rect width="100%" height="100%" fill="fb-green" />
-				<text>Gamemode 3</text>
-			</use>
-		</use>
-	</svg> -->
+	<!-- GAMEMODE IMAGE -->
+  <svg class="gamemode-screen">
+		<image class="hidden" href="gamemodemenu.png"  />
+	</svg>
 	<!-- DEBUG FRAMES -->
 	<!-- <svg width="24" height="21">
 		<rect width="100%" height="100%" fill="black"/>
