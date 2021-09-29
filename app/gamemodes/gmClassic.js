@@ -53,6 +53,9 @@ function getBrickRow(gameLevel) {
 	return returnBricks;
 }
 
+const scoreText = document.getElementById("current-score-text");
+const finalScoreText = document.getElementById("final-score-text");
+
 function screenClick(evt) {
 	// Don't do this for the first level because they can be placed anywhere
 	if (level > 1) {
@@ -63,10 +66,12 @@ function screenClick(evt) {
 		// "Remove" the bricks that are not on the platform bricks
 		activeBricks = activeBricks.filter(brick => -1 != platformXs.indexOf(brick[0]));
 	}
-	// Add up score
+	// Add up & update score
 	score += level * activeBricks.length;
 	console.log("Adding " + level * activeBricks.length + " to score.")
 	console.log("Score: " + score)
+
+	scoreText.text = "Score: " + String(score);
 
 	level++;
 
@@ -92,11 +97,13 @@ export function gmClassicSetup(status, { rowCount }) {
 	const myGradient = document.getElementById('bgGradient');
 	myGradient.gradient.colors.c1 = "red";
 	myGradient.gradient.colors.c2 = "lime";
+	scoreText.style.fill = "white";
 	localRowCount = rowCount;
 	
 	activeBricks.forEach(utils.show);
 	calculateCurrentSpeed();
-	
+
+	scoreText.text = "Score: 0"
 	controls.onTap(screenClick);
 	status.progress++; 
 }

@@ -53,6 +53,9 @@ function getBrickRow(gameLevel) {
 	return returnBricks;
 }
 
+const scoreText = document.getElementById("current-score-text");
+const finalScoreText = document.getElementById("final-score-text");
+
 function screenClick(evt) {
 	// Don't do this for the first level because they can be placed anywhere
 	if (level > 1) {
@@ -69,6 +72,7 @@ function screenClick(evt) {
 	score += level * activeBricks.length;
 	console.log("Adding " + level * 11 + " to score.")
 	console.log("Score: " + score)
+	scoreText.text = "Score: " + String(score);
 
 	level++;
 	// Move active bricks into shown bricks
@@ -98,7 +102,7 @@ export function gmHardcoreSetup(status, { rowCount }) {
 	
 	activeBricks.forEach(utils.show);
 	calculateCurrentSpeed();
-	
+	scoreText.text = "Score: 0"
 	controls.onTap(screenClick);
 	status.progress++; 
 }
