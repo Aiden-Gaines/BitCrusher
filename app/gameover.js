@@ -5,22 +5,23 @@ import * as controls from './controls';
 
 //VARIABLES
 const endScreenElems = document.getElementsByClassName('endScreen')[0];
-const clicked = false;
-const firstRun = true;
+let clicked = false;
+let firstRun = true;
 
 
 //FUNCTIONS
 function screenClick(evt) { clicked = true; }
 
-export function gameover(status, {}) {
+export function gameover(status, { progressStates }) {
 	if (firstRun){
-		endScreenElems.children.forEach((item) => { item.class = ""; });
+		endScreenElems.children.forEach((item) => { item.class = ''; });
 		//use other contols button
-		controls.addFuncOnTap(screenClick);
+		controls.onTap(screenClick);
 		firstRun = false;
 	}
-	if (clicked){
-		endScreenElems.children.forEach((item) => { item.class = "hidden"; });
-		status.progress=1;
+	if (clicked) {
+		endScreenElems.children.forEach((item) => { item.class = 'hidden'; });
+		controls.onTapRemove(screenClick);
+		status.progress = progressStates.mainMenuScreen;
 	}
 }

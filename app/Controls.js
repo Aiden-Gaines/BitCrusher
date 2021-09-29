@@ -15,15 +15,17 @@ const clickFuncs = [];
 
 
 // FUNCTIONS
-export function addFuncOnTap(func) {
+export function onTap(func) {
 	clickFuncs.push(func);
+	console.log(clickFuncs);
 }
 
-export function removeFuncOnTap(func) {
+export function onTapRemove(func) {
 	const index = clickFuncs.indexOf(func);
 	if (index > -1) {
 		clickFuncs.splice(index, 1);
 	}
+	console.log(clickFuncs);
 }
 
 

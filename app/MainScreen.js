@@ -12,16 +12,22 @@ let firstRun = true;
 //FUNCTIONS
 function screenClick(evt) { clicked = true; }
 
+// Sets the dynamic file variables to the value they had at the start of the program
+function resetVariables() {
+	clicked = false;
+	firstRun = true;
+}
+
 export function MainScreen(status, {}) {
     if (firstRun){
         mainScreenElems.children.forEach((item) => { item.class = ""; });
-    //console.log(mainScreenElems);
-    //use other contols button
-        controls.addFuncOnTap(screenClick);
+        controls.onTap(screenClick);
         firstRun = false;
     }
     if (clicked){
-        mainScreenElems.children.forEach((item) => { item.class = "hidden"; });
+		mainScreenElems.children.forEach((item) => { item.class = "hidden"; });
+		controls.onTapRemove(screenClick);
+		resetVariables();
         status.progress++;
     }
 }

@@ -1,6 +1,7 @@
 'use strict';
 // IMPORTS
 import * as utils from '../../common/utils';
+import * as controls from '../controls';
 import document from 'document';
 
 
@@ -32,14 +33,18 @@ function getNewActiveBricks(colCount) {
 }
 
 function getBrickRow(gameLevel) {
+	const found = false;
 	const returnBricks = [];
 	const shownIndex = shownBricks.length;
 
 	while (shownIndex--) {
+		// Current brick we are on in the shownBrick array
 		const curBrick = shownBricks[shownIndex];
+		// If the current bricks index is 
 		if (curBrick[1] == (localRowCount - gameLevel)) {
 			returnBricks.push(curBrick);
-		} else {
+			found = true;
+		} else if (found) {
 			break;
 		}
 	}
@@ -56,18 +61,19 @@ function screenClick(evt) {
 		activeBricks.filter(brick => -1 == platformXs.indexOf(brick[0])).forEach(utils.hide);
 		// "Remove" the bricks that are not on the platform bricks
 		activeBricks = activeBricks.filter(brick => -1 != platformXs.indexOf(brick[0]));
-	// This is for the final row, when we don't want to move upwards anymore, and instead trigger the end animation
 	}
 
 	level++;
+	// Move active bricks into shown bricks
+	activeBricks.forEach((item) => { shownBricks.push(item); });
 
+	// This checks if we are done with the top row and then ends the game
 	if (level > localRowCount) {
+		level++;
 		activeBricks = [];
 		return;
 	}
 
-	// Move active bricks into shown bricks
-	activeBricks.forEach((item) => { shownBricks.push(item); });
 	// Create new active bricks in the new row
 	activeBricks = utils.moveBricks(activeBricks, [activeBricks[0][0] * -1, -1]);
 	// Show the newly created active bricks
@@ -78,21 +84,20 @@ function screenClick(evt) {
 }
 
 export function gmClassicSetup(status, { rowCount }) {
-	const myButton = document.getElementById('button-screenwide');
 	const myGradient = document.getElementById('bgGradient');
 	myGradient.gradient.colors.c1 = "red";
 	myGradient.gradient.colors.c2 = "lime";
 	localRowCount = rowCount;
-	myButton.onclick = screenClick;
-
+	
 	activeBricks.forEach(utils.show);
 	calculateCurrentSpeed();
-
+	
+	controls.onTap(screenClick);
 	status.progress++; 
 }
 
 export function gmClassic(status, { colCount }) {
-	if (status.frame % speed == 0) {
+	if (status.frame % 5 == 0) {
 		if (activeBricks.length == 0) {
 			// Last thing ran before starting closing animation loop
 			// Set some variables once before we begin
@@ -120,6 +125,7 @@ export function gmClassicGameEnd(status, {}) {
 			if (shownBricks.length != 0) {
 				utils.hide(shownBricks.pop());
 			} else {
+				controls.onTapRemove(screenClick);
 				status.progress = 100;
 			}
 		}
