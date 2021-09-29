@@ -89,16 +89,16 @@ function hslToHex(h, s, l) {
 
 function shiftHue(amount) {
 	//console.log("Current Colors: " + lastHue1 + " and " + lastHue2);
-	lastHue1 = lastHue1 + amount
-	lastHue2 = lastHue2 + amount
+	lastHue1 = lastHue1 + amount;
+	lastHue2 = lastHue2 + amount;
 	if (lastHue1 >= 360) {
-		lastHue1 = lastHue1 - 360
+		lastHue1 = lastHue1 - 360;
 	}
 	if (lastHue2 >= 360) {
-		lastHue2 = lastHue2 - 360
+		lastHue2 = lastHue2 - 360;
 	}
-	myGradient.gradient.colors.c1 = hslToHex(lastHue1,100,50);
-	myGradient.gradient.colors.c2 = hslToHex(lastHue2,100,50);
+	myGradient.gradient.colors.c1 = hslToHex(lastHue1, 100, 50);
+	myGradient.gradient.colors.c2 = hslToHex(lastHue2, 100, 50);
 }
 
 function resetVariables() {
@@ -160,9 +160,9 @@ export function gmDrunkSetup(status, { rowCount }) {
 	
 	activeBricks.forEach(utils.show);
 	calculateCurrentSpeed();
-	scoreText.text = "Score: 0"
+	scoreText.text = "Score: 0";
 	controls.onTap(screenClick);
-	status.progress++; 
+	status.progress++;
 }
 
 export function gmDrunk(status, { colCount }) {
