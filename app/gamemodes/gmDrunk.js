@@ -1,18 +1,20 @@
 'use strict';
 // IMPORTS
 import * as utils from '../../common/utils';
+import * as controls from '../controls';
 import document from 'document';
 
 
 // VARIABLES
 let flashingBricks;
 let endFlashAmt = 7;
-const speed = 10;
+const speed = 15;
 const direction = 1;
 const localRowCount = 9;
 const level = 1;
+const score = 0;
 const shownBricks = [];
-export const activeBricks = [[2,8],[3, 8], [4, 8], [5, 8]];
+export const activeBricks = [[3, 8], [4, 8], [5, 8]];
 
 
 // FUNCTIONS
@@ -32,49 +34,23 @@ function getNewActiveBricks(colCount) {
 }
 
 function getBrickRow(gameLevel) {
+	const found = false;
 	const returnBricks = [];
 	const shownIndex = shownBricks.length;
 
 	while (shownIndex--) {
+		// Current brick we are on in the shownBrick array
 		const curBrick = shownBricks[shownIndex];
+		// If the current bricks index is 
 		if (curBrick[1] == (localRowCount - gameLevel)) {
 			returnBricks.push(curBrick);
-		} else {
+			found = true;
+		} else if (found) {
 			break;
 		}
 	}
 
 	return returnBricks;
-}
-
-function screenClick(evt) {
-	// Don't do this for the first level because they can be placed anywhere
-	if (level > 1) {
-		// Get the x values of the top shown bricks (the bricks that we want to "land" on)
-		const platformXs = getBrickRow(level - 1).map(item => item[0]);
-		// Hide the bricks that are not on the platform bricks
-		activeBricks.filter(brick => -1 == platformXs.indexOf(brick[0])).forEach(utils.hide);
-		// "Remove" the bricks that are not on the platform bricks
-		activeBricks = activeBricks.filter(brick => -1 != platformXs.indexOf(brick[0]));
-	// This is for the final row, when we don't want to move upwards anymore, and instead trigger the end animation
-	}
-
-	level++;
-
-	if (level > localRowCount) {
-		activeBricks = [];
-		return;
-	}
-
-	// Move active bricks into shown bricks
-	activeBricks.forEach((item) => { shownBricks.push(item); });
-	// Create new active bricks in the new row
-	activeBricks = utils.moveBricks(activeBricks, [activeBricks[0][0] * -1, -1]);
-	// Show the newly created active bricks
-	activeBricks.forEach(utils.show);
-
-	// Finish up
-	calculateCurrentSpeed();
 }
 
 function hslToHex(h, s, l) {
@@ -107,37 +83,85 @@ function hslToHex(h, s, l) {
 }
 
 
-export function gmDrunkSetup(status, { rowCount }) {
-	const myButton = document.getElementById('button-screenwide');
-	const myGradient = document.getElementById('bgGradient');
-	myGradient.gradient.colors.c1 = "red";
-	myGradient.gradient.colors.c2 = "lime";
-	localRowCount = rowCount;
-	myButton.onclick = screenClick;
+const myGradient = document.getElementById('bgGradient');
 
-	activeBricks.forEach(utils.show);
-	calculateCurrentSpeed();
+const lastHue1 = 0;
+const lastHue2 = 50;
 
-	status.progress++; 
+function shiftHue(amount) {
+	//console.log("Current Colors: " + lastHue1 + " and " + lastHue2);
+	lastHue1 = lastHue1 + amount
+	lastHue2 = lastHue2 + amount
+	if (lastHue1 >= 360) {
+		lastHue1 = lastHue1 - 360
+	}
+	if (lastHue2 >= 360) {
+		lastHue2 = lastHue2 - 360
+	}
+	myGradient.gradient.colors.c1 = hslToHex(lastHue1,100,50);
+	myGradient.gradient.colors.c2 = hslToHex(lastHue2,100,50);
 }
 
 
+function screenClick(evt) {
+	// Don't do this for the first level because they can be placed anywhere
+	if (level > 1) {
+		// Get the x values of the top shown bricks (the bricks that we want to "land" on)
+		const platformXs = getBrickRow(level - 1).map(item => item[0]);
+		// Hide the bricks that are not on the platform bricks
+		activeBricks.filter(brick => -1 == platformXs.indexOf(brick[0])).forEach(utils.hide);
+		// "Remove" the bricks that are not on the platform bricks
+		activeBricks = activeBricks.filter(brick => -1 != platformXs.indexOf(brick[0]));
+	}
 
 
-const myGradient = document.getElementById('bgGradient');
+	// Add up score
+	score += level * activeBricks.length;
+	console.log("Adding " + level * activeBricks.length + " to score.")
+	console.log("Score: " + score)
 
-function getRandomInt(min, max) {
-	min = Math.ceil(min);
-	max = Math.floor(max);
-	return Math.floor(Math.random() * (max - min) + min); //The maximum is exclusive and the minimum is inclusive
-  }
+	level++;
+	// Move active bricks into shown bricks
+	activeBricks.forEach((item) => { shownBricks.push(item); });
+
+	// This checks if we are done with the top row and then ends the game
+	if (level > localRowCount) {
+		level++;
+		activeBricks = [];
+		return;
+	}
+
+	// Create new active bricks in the new row
+	activeBricks = utils.moveBricks(activeBricks, [activeBricks[0][0] * -1, -1]);
+	// Show the newly created active bricks
+	activeBricks.forEach(utils.show);
+
+	// Finish up
+	calculateCurrentSpeed();
+}
+
+
+export function gmDrunkSetup(status, { rowCount }) {
+	myGradient.gradient.colors.c1 = "red";
+	myGradient.gradient.colors.c2 = "lime";
+	localRowCount = rowCount;
+	
+	activeBricks.forEach(utils.show);
+	calculateCurrentSpeed();
+	
+	controls.onTap(screenClick);
+	status.progress++; 
+}
 
 export function gmDrunk(status, { colCount }) {
+	status.score = score;
+	shiftHue(7);
+	// Aiden's special formula thing that makes the movement random but also following the speed increase
 	if (status.frame % Math.ceil(Math.random() * speed) == 0) {
+		// Shifting the background color gradient
 		if (activeBricks.length == 0) {
 			// Last thing ran before starting closing animation loop
 			// Set some variables once before we begin
-			console.log(level - 2);
 			flashingBricks = getBrickRow(level - 2);
 			status.progress++;
 			return;
@@ -147,8 +171,6 @@ export function gmDrunk(status, { colCount }) {
 
 		for (const brick of switchBricks) {
 			utils.flip(brick);
-			myGradient.gradient.colors.c1 = hslToHex(getRandomInt(1,360),100,50);
-			myGradient.gradient.colors.c2 = hslToHex(getRandomInt(1,360),100,50);
 		}
 
 		activeBricks = newActiveBricks;
@@ -164,6 +186,7 @@ export function gmDrunkGameEnd(status, {}) {
 			if (shownBricks.length != 0) {
 				utils.hide(shownBricks.pop());
 			} else {
+				controls.onTapRemove(screenClick);
 				status.progress = 100;
 			}
 		}

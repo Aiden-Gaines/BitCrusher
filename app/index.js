@@ -26,7 +26,8 @@ const status = {
 	frame: 0,
 	progress: 0,
 	currentRAFFrame: -1,
-	currentGamemode: 10,
+	currentGamemode: 40,
+	score: 0,
 }
 const globals = {
 	// Variables to store which progress state is mapped to which number
@@ -112,11 +113,11 @@ function animate() {
 		case (globals.progressStates.gmHardcoreSetup):
 			requestAnimationFrame(() => gmHardcoreSetup(status, globals));
 		// 21- Main loop for the hardcore gamemode
-		case (globals.progressStates.gmHardcode):
+		case (globals.progressStates.gmHardcore):
 			requestAnimationFrame(() => gmHardcore(status, globals));
 			break;
 		// 22- Game end for hardcore gamemode
-		case (globals.progressStates.gmHardcodeEnd):
+		case (globals.progressStates.gmHardcoreEnd):
 			requestAnimationFrame(() => gmHardcoreGameEnd(status, globals));
 			break;
 		// 30- Setup loop for the infinite gamemode
